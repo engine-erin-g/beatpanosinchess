@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify Sequence</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+</head>
+<body>
+    <h2>Verifying Modern Defense Sequence</h2>
+    <div id="output"></div>
+    <script>
+        const game = new Chess();
+        const output = document.getElementById('output');
+
+        const sequence = [
+            'e4', 'g6',
+            'd4', 'Bg7',
+            'Nf3', 'd6',
+            'Bc4', 'Nd7',
+            'Bxf7+', 'Nxf7',
+            'Ng5+', 'Kf6',
+            'Qf3#'
+        ];
+
+        let html = '<h3>Playing moves:</h3>';
+        sequence.forEach((move, i) => {
+            const result = game.move(move);
+            const color = i % 2 === 0 ? 'White' : 'Black';
+            const moveNum = Math.floor(i/2) + 1;
+            html += `<p>${color} move ${moveNum}: ${move} => ${result ? '✓ ' + result.san : '✗ FAILED'}</p>`;
+            if (!result) {
+                html += `<p style="color: red;">FEN: ${game.fen()}</p>`;
+                html += '<p style="color: red;">Legal moves: ' + game.moves().join(', ') + '</p>';
+            }
+        });
+
+        html += `<p><strong>Final position:</strong> ${game.fen()}</p>`;
+        html += `<p><strong>Game over:</strong> ${game.game_over()}</p>`;
+        html += `<p><strong>Checkmate:</strong> ${game.in_checkmate()}</p>`;
+
+        output.innerHTML = html;
+    </script>
+</body>
+</html>
