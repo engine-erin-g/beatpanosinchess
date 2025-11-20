@@ -3,7 +3,15 @@
     "allow": [
       "Bash(open:*)",
       "Bash(cat:*)",
-      "Bash(node -c:*)"
+      "Bash(node -c:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Chess Opening Trainer\n\nA web-based chess opening trainer with interactive board, step-by-step\ninstructions, and multiple openings support.\n\nFeatures:\n- Interactive chess board with hints\n- Italian Game variations for white\n- Caro-Kann Defense for black\n- Sound effects for piece movements\n- Move history tracking\n- Resource links for learning chess notation and principles\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(ssh-keyscan:*)",
+      "Bash(~/.ssh/known_hosts)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
