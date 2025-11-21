@@ -49,6 +49,24 @@ registerOpening({
             computerMoves: {
                 playAsBlack: ['e3', 'Bd3', 'c4', 'cxd5']
             }
+        },
+
+        'e4-Bc4': {
+            name: 'e4-Bc4',
+
+            sequences: {
+                playAsBlack: [
+                    { move: null, instruction: "You are black. Let's learn to respond to the Bc4 variation. Wait for white's first move." },
+                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
+                    { move: 'd5', instruction: "Good! White plays Bc4. Play d5 to challenge the center and attack the bishop!" },
+                    { move: 'cxd5', instruction: "Excellent! White captures exd5. Recapture with cxd5!" },
+                    { move: 'Bf5', instruction: "Perfect! White retreats Bd3. Develop your bishop to f5 - the classic Caro-Kann bishop!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsBlack: ['e4', 'Bc4', 'exd5', 'Bd3']
+            }
         }
     }
 });
