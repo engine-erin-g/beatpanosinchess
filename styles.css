@@ -154,6 +154,7 @@ h1 {
     left: 8px;
     width: auto;
     text-align: left;
+    transform: translateY(-50%);
 }
 
 .file-coord {
@@ -161,6 +162,7 @@ h1 {
     height: auto;
     width: auto;
     text-align: center;
+    transform: translateX(-50%);
 }
 
 /* Squares */
@@ -579,7 +581,7 @@ h3 {
     }
 
     .square {
-        font-size: clamp(1.5em, 4.5vw, 2.2em);
+        font-size: clamp(2em, 8vw, 3em);
     }
 
     .coordinates {

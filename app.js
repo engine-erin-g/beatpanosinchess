@@ -261,18 +261,16 @@ function updateCoordinatePositions() {
     const actualSquareSize = actualBoardWidth / 8;
     const wrapperPadding = parseInt(getComputedStyle(wrapperElement).padding) || 25;
 
-    // Update rank coordinates
+    // Update rank coordinates (CSS transform handles centering)
     const rankCoords = wrapperElement.querySelectorAll('.rank-coord');
     rankCoords.forEach((rankLabel, index) => {
-        const fontSize = parseFloat(getComputedStyle(rankLabel).fontSize) || 18;
-        rankLabel.style.top = (wrapperPadding + index * actualSquareSize + actualSquareSize / 2 - fontSize / 2) + 'px';
+        rankLabel.style.top = (wrapperPadding + index * actualSquareSize + actualSquareSize / 2) + 'px';
     });
 
-    // Update file coordinates
+    // Update file coordinates (CSS transform handles centering)
     const fileCoords = wrapperElement.querySelectorAll('.file-coord');
     fileCoords.forEach((fileLabel, index) => {
-        const fontSize = parseFloat(getComputedStyle(fileLabel).fontSize) || 18;
-        fileLabel.style.left = (wrapperPadding + index * actualSquareSize + actualSquareSize / 2 - fontSize / 2) + 'px';
+        fileLabel.style.left = (wrapperPadding + index * actualSquareSize + actualSquareSize / 2) + 'px';
     });
 }
 
@@ -298,10 +296,9 @@ function createBoard() {
         const rankLabel = document.createElement('div');
         rankLabel.className = 'coordinates rank-coord';
         rankLabel.textContent = rank;
-        // Position will be set after element is added to DOM so we can get fontSize
         wrapperElement.appendChild(rankLabel);
-        const fontSize = parseFloat(getComputedStyle(rankLabel).fontSize) || 18;
-        rankLabel.style.top = (wrapperPadding + index * actualSquareSize + actualSquareSize / 2 - fontSize / 2) + 'px';
+        // CSS transform handles centering
+        rankLabel.style.top = (wrapperPadding + index * actualSquareSize + actualSquareSize / 2) + 'px';
     });
 
     // Add file coordinates (letters)
@@ -309,10 +306,9 @@ function createBoard() {
         const fileLabel = document.createElement('div');
         fileLabel.className = 'coordinates file-coord';
         fileLabel.textContent = file;
-        // Position will be set after element is added to DOM so we can get fontSize
         wrapperElement.appendChild(fileLabel);
-        const fontSize = parseFloat(getComputedStyle(fileLabel).fontSize) || 18;
-        fileLabel.style.left = (wrapperPadding + index * actualSquareSize + actualSquareSize / 2 - fontSize / 2) + 'px';
+        // CSS transform handles centering
+        fileLabel.style.left = (wrapperPadding + index * actualSquareSize + actualSquareSize / 2) + 'px';
     });
 
     ranks.forEach((rank, rankIndex) => {
