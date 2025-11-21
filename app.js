@@ -90,7 +90,7 @@ function playMoveSound() {
 // Listen for changes in selectors
 document.getElementById('color-select').addEventListener('change', handleSelectorChange);
 document.getElementById('opening-select').addEventListener('change', handleOpeningChange);
-document.getElementById('variation-select').addEventListener('change', handleSelectorChange);
+document.getElementById('variation-select').addEventListener('change', initializeGame);
 document.getElementById('reset-button').addEventListener('click', resetTraining);
 
 function setupHintsToggle() {
@@ -163,10 +163,15 @@ function updateVariationDropdown() {
     variationSelect.innerHTML = '';
 
     // Add new options
+    let isFirst = true;
     for (const [variationId, variation] of Object.entries(variations)) {
         const option = document.createElement('option');
         option.value = variationId;
         option.textContent = variation.name;
+        if (isFirst) {
+            option.selected = true;
+            isFirst = false;
+        }
         variationSelect.appendChild(option);
     }
 }
@@ -486,6 +491,8 @@ function showHintOnBoard() {
     // Try to find the piece that should move and highlight it
     const legalMoves = game.moves({ verbose: true });
     const expectedMoveObj = legalMoves.find(move => move.san === expectedMove);
+
+    console.log('showHintOnBoard:', { expectedMove, isUserTurn, legalMoves: legalMoves.map(m => m.san), found: !!expectedMoveObj });
 
     if (expectedMoveObj) {
         const fromSquare = document.getElementById(expectedMoveObj.from);

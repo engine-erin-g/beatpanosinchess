@@ -72,6 +72,29 @@ registerOpening({
             }
         },
 
+        'e5-d6-Nc6-Nd4': {
+            name: 'e5-d6-Nc6-Nd4',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "Classic Italian" },
+                    { move: 'Nf3', instruction: "Still classic italian" },
+                    { move: 'd4', instruction: "Still classic italian" },
+                    { move: 'd5', instruction: "Attack the black knight" },
+                    { move: 'Nxd4', instruction: "Get that Knight" },
+                    { move: 'Qxd4', instruction: "Get the pawn" },
+                    { move: 'Bb5+', instruction: "Pin the knight and pressure the queenside!" },
+                    { move: 'dxc6', instruction: "Ready for the fork - check the king!" },
+                    { move: 'Bxc6+', instruction: "Capture the knight with the pawn" },
+                    { move: 'Bxa8', instruction: "Take the rook! Now develop the Knight and the Bishop" }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['e5', 'd6', 'Nc6', 'Nd4', 'exd4', 'Nf6', 'c6', 'bxc6', 'Bd7']
+            }
+        },
+
         'copy-cat': {
             name: 'Copy Cat',
 
