@@ -172,13 +172,14 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 7.5em;
+    font-size: 80cqmin;
     cursor: pointer;
     user-select: none;
     position: relative;
     box-sizing: border-box;
     transition: none;
     overflow: hidden;
+    container-type: size;
 }
 
 .square.light {
@@ -421,10 +422,6 @@ h3 {
         height: clamp(280px, calc(100vw - 100px), 600px);
     }
 
-    .square {
-        font-size: clamp(2em, 6vw, 4.5em);
-    }
-
     .info-container {
         width: 100%;
         max-width: 700px;
@@ -480,10 +477,6 @@ h3 {
     #board {
         width: clamp(250px, calc(100vw - 70px), 500px);
         height: clamp(250px, calc(100vw - 70px), 500px);
-    }
-
-    .square {
-        font-size: clamp(1.8em, 5vw, 3em);
     }
 
     .coordinates {
@@ -580,10 +573,6 @@ h3 {
         height: clamp(200px, calc(100vw - 50px), 380px);
     }
 
-    .square {
-        font-size: clamp(2em, 8vw, 3em);
-    }
-
     .coordinates {
         font-size: clamp(9px, 1.8vw, 11px);
     }
@@ -669,10 +658,6 @@ h3 {
 
     .board-wrapper {
         padding: 8px;
-    }
-
-    .square {
-        font-size: clamp(1.3em, 4vw, 1.8em);
     }
 
     .coordinates {
