@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Opening Trainer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sentence selector -->
+        <div class="selector-container">
+            <p class="instruction">
+                I am
+                <select id="color-select" class="select-input">
+                    <option value="white">white</option>
+                    <option value="black">black</option>
+                </select>
+                and want to learn how to play the
+                <select id="opening-select" class="select-input">
+                    <option value="caro-kann">Caro-Kann Defense</option>
+                    <option value="giuoco-piano">Giuoco Piano</option>
+                    <option value="italian-game" selected>Italian Game</option>
+                    <option value="london-system">London System</option>
+                    <option value="modern-defense">Modern Defense</option>
+                    <option value="sicilian-defense">Sicilian Defense</option>
+                </select>
+                :
+                <select id="variation-select" class="select-input">
+                    <option value="pseudo-austrian-attack">Pseudo-Austrian Attack</option>
+                </select>
+            </p>
+        </div>
+
+        <!-- Training area -->
+        <div class="training-container">
+            <div class="board-container">
+                <div class="board-wrapper">
+                    <div id="board" class="chess-board"></div>
+                </div>
+            </div>
+
+            <div class="info-container">
+                <div class="hints-toggle">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="hints-toggle" checked>
+                        <span class="toggle-text">Show Hints</span>
+                    </label>
+                </div>
+
+                <div id="instruction-box" class="instruction-box">
+                    <p id="instruction-text">Select your preferences above and make your first move...</p>
+                </div>
+
+                <div id="move-history" class="move-history">
+                    <h3>Move History</h3>
+                    <div id="moves-list">No moves yet</div>
+                </div>
+
+                <button id="reset-button" class="reset-button">Reset Board</button>
+
+                <div class="resource-links">
+                    <a href="notation-guide.html" class="resource-link">
+                        📖 Learn Chess Notation
+                    </a>
+                    <a href="chess-principles.html" class="resource-link">
+                        ♟️ Chess Principles
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chess.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <!-- Opening registry (must load first) -->
+    <script src="openings.js"></script>
+
+    <!-- Individual opening definitions (add new opening files here) -->
+    <script src="openings/caro-kann.js"></script>
+    <script src="openings/italian-game.js"></script>
+
+    <!-- Main application -->
+    <script src="app.js"></script>
+</body>
+</html>
