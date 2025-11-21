@@ -195,6 +195,16 @@ h1 {
     background-color: #7fc97f !important;
 }
 
+/* Piece colors - using filled symbols with CSS coloring for consistent sizing */
+.square.white-piece {
+    color: #fff;
+    text-shadow: 0 0 2px #000, 0 0 2px #000, 1px 1px 1px #000;
+}
+
+.square.black-piece {
+    color: #000;
+}
+
 .square.hint-from {
     box-shadow: inset 0 0 0 3px rgba(59, 130, 246, 0.5);
 }

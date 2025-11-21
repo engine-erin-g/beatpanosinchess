@@ -23,9 +23,9 @@ let audioContext = null;
 // CONSTANTS
 // ============================================================================
 
-// Chess piece Unicode characters
+// Chess piece Unicode characters (using filled symbols for consistent sizing)
 const pieces = {
-    'wK': '♔', 'wQ': '♕', 'wR': '♖', 'wB': '♗', 'wN': '♘', 'wP': '♙',
+    'wK': '♚', 'wQ': '♛', 'wR': '♜', 'wB': '♝', 'wN': '♞', 'wP': '♟',
     'bK': '♚', 'bQ': '♛', 'bR': '♜', 'bB': '♝', 'bN': '♞', 'bP': '♟'
 };
 
@@ -344,8 +344,11 @@ function updateBoard() {
                 const color = piece.color === 'w' ? 'w' : 'b';
                 const type = piece.type.toUpperCase();
                 squareElement.textContent = pieces[color + type];
+                squareElement.classList.remove('white-piece', 'black-piece');
+                squareElement.classList.add(color === 'w' ? 'white-piece' : 'black-piece');
             } else {
                 squareElement.textContent = '';
+                squareElement.classList.remove('white-piece', 'black-piece');
             }
         }
     }
