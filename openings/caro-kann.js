@@ -31,6 +31,24 @@ registerOpening({
             computerMoves: {
                 playAsBlack: ['e4', 'd4', 'e5', 'dxc5', 'Nf3', 'Be2', 'O-O']
             }
+        },
+
+        'e3-Bd3': {
+            name: 'e3-Bd3',
+
+            sequences: {
+                playAsBlack: [
+                    { move: null, instruction: "You are black. Let's learn to respond to the e3-Bd3 system. Wait for white's first move." },
+                    { move: 'd5', instruction: "White plays e3. Play d5 to control the center!" },
+                    { move: 'e5', instruction: "Good! White plays Bd3. Play e5 to grab more space in the center!" },
+                    { move: 'Nc6', instruction: "Excellent! White plays c4. Develop your knight to c6!" },
+                    { move: 'Qxd5', instruction: "Perfect! White captures cxd5. Recapture with Qxd5, centralizing your queen!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsBlack: ['e3', 'Bd3', 'c4', 'cxd5']
+            }
         }
     }
 });
