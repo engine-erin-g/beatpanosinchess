@@ -67,6 +67,28 @@ registerOpening({
             computerMoves: {
                 playAsBlack: ['e4', 'Bc4', 'exd5', 'Bd3']
             }
+        },
+
+        'e4-Qh5-Qh4': {
+            name: 'e4-Qh5-Qh4',
+
+            sequences: {
+                playAsBlack: [
+                    { move: null, instruction: "You are black. Let's learn how to handle the aggressive early queen attack. Wait for white's first move." },
+                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
+                    { move: 'Nf6', instruction: "White plays Qh5, attacking f7! Defend with Nf6, also developing and attacking the queen." },
+                    { move: 'e5', instruction: "Good! White retreats to Qh4. Play e5 to control the center!" },
+                    { move: 'd6', instruction: "White plays f4. Solidify your center with d6!" },
+                    { move: 'dxe5', instruction: "Excellent! White captures fxe5. Recapture with dxe5!" },
+                    { move: 'Be7', instruction: "Perfect! White develops Nf3. Develop your bishop to e7!" },
+                    { move: 'O-O', instruction: "Great! White plays Qg3. Castle kingside to bring your rook into play!" },
+                    { move: 'b5', instruction: "Well done! White develops Nc3. Play b5 to start your queenside expansion. You've successfully defended against the early queen attack!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsBlack: ['e4', 'Qh5', 'Qh4', 'f4', 'fxe5', 'Nf3', 'Qg3', 'Nc3']
+            }
         }
     }
 });
