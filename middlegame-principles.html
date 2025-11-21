@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Middle Game Principles - Chess Opening Trainer</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .guide-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .principle {
+            background: #f9f6f0;
+            border: 2px solid #8b7355;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .principle-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #8b7355;
+            padding-bottom: 10px;
+        }
+
+        .principle-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #fefdfb;
+            background: #5a4a3a;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            border: 2px solid #8b7355;
+        }
+
+        .principle-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #3d2817;
+            flex: 1;
+        }
+
+        .principle-description {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #3d2817;
+            margin-bottom: 15px;
+        }
+
+        .example-box {
+            background: #fefdfb;
+            border: 2px dashed #8b7355;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #5a4a3a;
+            margin-bottom: 8px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        .good-example {
+            color: #2d5016;
+            padding: 5px 0;
+        }
+
+        .bad-example {
+            color: #7d1007;
+            padding: 5px 0;
+        }
+
+        .good-example::before {
+            content: "✓ ";
+            font-weight: bold;
+        }
+
+        .bad-example::before {
+            content: "✗ ";
+            font-weight: bold;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: #8b7355;
+            color: #fefdfb;
+            padding: 4px 12px;
+            font-size: 0.85em;
+            margin-top: 10px;
+            border: 1px solid #5a4a3a;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #5a4a3a;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #8b7355;
+            padding: 10px 20px;
+            background: #fefdfb;
+            transition: background 0.2s;
+        }
+
+        .back-link:hover {
+            background: #e8e0d5;
+        }
+
+        h1 {
+            color: #3d2817;
+            border-bottom: 3px double #8b7355;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .intro-box {
+            background: #e8e0d5;
+            border: 2px solid #8b7355;
+            padding: 20px;
+            margin-bottom: 30px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container guide-container">
+        <a href="index.html" class="back-link">← Back to Trainer</a>
+
+        <h1>Middle Game Principles</h1>
+
+        <div class="intro-box">
+            The middlegame is where chess becomes truly complex and creative. After completing development, you must
+            formulate plans, coordinate your pieces, and create threats. These principles will help you navigate the
+            middlegame with confidence and purpose!
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">1</div>
+                <div class="principle-title">Always Have a Plan</div>
+            </div>
+            <div class="principle-description">
+                Never move without a purpose. After the opening, ask yourself: "What is my plan?" Common plans include:
+                attacking the king, improving piece positions, creating pawn breaks, exploiting weaknesses, or controlling
+                key squares. If you don't have a plan, improve your worst-placed piece.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Sample Plans:</div>
+                <div class="good-example">Attack the kingside with pawns and pieces</div>
+                <div class="good-example">Create a passed pawn on the queenside</div>
+                <div class="good-example">Improve knight from b1 to d5 via c3 and e4</div>
+                <div class="bad-example">Random moves without strategic purpose</div>
+            </div>
+            <div class="category-badge">STRATEGY</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">2</div>
+                <div class="principle-title">Attack Weaknesses</div>
+            </div>
+            <div class="principle-description">
+                Look for weak pawns and squares in your opponent's position. Weaknesses can't be defended by pawns:
+                isolated pawns, backward pawns, doubled pawns, and squares that can't be controlled by pawns (holes).
+                Direct your pieces toward these targets.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Common Weaknesses:</div>
+                <div class="good-example">Target isolated d-pawn with pieces</div>
+                <div class="good-example">Occupy hole on d5 with a knight</div>
+                <div class="good-example">Attack doubled pawns on the c-file</div>
+                <div class="bad-example">Ignoring opponent's weaknesses and creating your own</div>
+            </div>
+            <div class="category-badge">STRATEGY</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">3</div>
+                <div class="principle-title">Create Outposts for Knights</div>
+            </div>
+            <div class="principle-description">
+                An outpost is a square deep in enemy territory that can't be attacked by pawns. Knights are especially
+                powerful on outposts (usually on the 5th or 6th rank) where they control key squares and can't be easily
+                driven away. Support your knight on an outpost with pawns.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">Knight on d5 supported by e4 pawn (classic outpost)</div>
+                <div class="good-example">Knight on f5 attacking e7, d6, h6 (kingside outpost)</div>
+                <div class="bad-example">Knight on e5 that can be kicked with ...f6</div>
+            </div>
+            <div class="category-badge">PIECE PLACEMENT</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">4</div>
+                <div class="principle-title">Good Knight vs Bad Bishop</div>
+            </div>
+            <div class="principle-description">
+                A "bad bishop" is blocked by its own pawns on the same color squares. A knight can be superior to
+                such a bishop. When you have a bad bishop, try to exchange it or place your pawns on the opposite
+                color. When facing a bad bishop, fix their pawns on that color.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">Bishop on c8 with pawns on d5, e6, f7 (bad - place on c1 first)</div>
+                <div class="good-example">Fix opponent's pawns on light squares when they have light-squared bishop</div>
+                <div class="bad-example">Keeping a bad bishop when you could trade it</div>
+            </div>
+            <div class="category-badge">PIECE EVALUATION</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">5</div>
+                <div class="principle-title">Two Bishops Are Powerful</div>
+            </div>
+            <div class="principle-description">
+                Having both bishops (the "bishop pair") is an advantage, especially in open positions. The two bishops
+                control all colors and work well together. Try to keep your bishop pair and trade your opponent's
+                bishops for your knights when possible.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Strategy:</div>
+                <div class="good-example">Keep both bishops in open positions with few pawns</div>
+                <div class="good-example">Trade knight for bishop when you keep the bishop pair</div>
+                <div class="bad-example">Trading away bishops without compensation in open positions</div>
+            </div>
+            <div class="category-badge">PIECE EVALUATION</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">6</div>
+                <div class="principle-title">Coordinate Your Pieces</div>
+            </div>
+            <div class="principle-description">
+                Pieces should work together toward a common goal. Uncoordinated pieces are easy to attack. Before
+                launching an attack, make sure your pieces are supporting each other. This is called piece harmony.
+                Doubled rooks, bishops aiming at the king, and pieces supporting advanced pawns are examples.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">Rooks doubled on the d-file create immense pressure</div>
+                <div class="good-example">Queen and bishop battery aimed at h7</div>
+                <div class="bad-example">Pieces scattered on unrelated squares with no coordination</div>
+            </div>
+            <div class="category-badge">PIECE COORDINATION</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">7</div>
+                <div class="principle-title">Space Advantage = More Options</div>
+            </div>
+            <div class="principle-description">
+                The player who controls more squares has a space advantage. With more space, your pieces have more
+                mobility and options. To gain space, advance pawns safely and control the center. When you have less
+                space, trade pieces to reduce cramping.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">Pawns on e5, d4, f4 give you space advantage</div>
+                <div class="good-example">Cramped position? Trade pieces to create room</div>
+                <div class="bad-example">Advancing pawns recklessly and creating weaknesses</div>
+            </div>
+            <div class="category-badge">POSITIONAL PLAY</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">8</div>
+                <div class="principle-title">Attack on the Side Where You're Stronger</div>
+            </div>
+            <div class="principle-description">
+                If you have more pieces on the kingside, attack there. If you have a pawn majority on the queenside,
+                push those pawns. Don't attack where your opponent is stronger—you'll waste time and resources.
+                Direct your forces where you have an advantage.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">4 pieces near enemy king → Attack kingside</div>
+                <div class="good-example">Queenside pawn majority → Push b4-b5-b6</div>
+                <div class="bad-example">Attacking on kingside with only your queen while opponent has 4 defenders</div>
+            </div>
+            <div class="category-badge">ATTACK</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">9</div>
+                <div class="principle-title">Open Lines Toward the Enemy King</div>
+            </div>
+            <div class="principle-description">
+                To successfully attack the king, you need open lines for your heavy pieces (rooks and queen). Use
+                pawn breaks to open files and diagonals. Common breaks include f4-f5, g4-g5 on the kingside, or
+                b4-b5, c4-c5 on the queenside.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">f4-f5 to open the f-file for your rook</div>
+                <div class="good-example">h4-h5-hxg6 to expose enemy king</div>
+                <div class="bad-example">Trying to attack without opening any lines</div>
+            </div>
+            <div class="category-badge">ATTACK</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">10</div>
+                <div class="principle-title">Don't Attack Without Enough Pieces</div>
+            </div>
+            <div class="principle-description">
+                A successful king attack usually requires at least 3-4 attacking pieces. Attacking with only one or
+                two pieces rarely works. Bring up reinforcements before launching your assault. If you can't get
+                enough pieces to the attack, look for a different plan.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">Queen, both rooks, and bishop attacking → Strong attack</div>
+                <div class="bad-example">Only queen and one rook attacking → Easy to defend</div>
+                <div class="good-example">Not enough attackers? Play on the other side of the board</div>
+            </div>
+            <div class="category-badge">ATTACK</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">11</div>
+                <div class="principle-title">When Attacked, Trade Pieces and Create Counterplay</div>
+            </div>
+            <div class="principle-description">
+                If your opponent attacks your king, don't panic. Trade off their attacking pieces to reduce the
+                pressure. Also, look for counterplay on the opposite side—attack their king or win material elsewhere.
+                This forces them to slow down their attack to defend.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Defensive Strategy:</div>
+                <div class="good-example">Trade your knight for their attacking bishop</div>
+                <div class="good-example">Under attack on kingside? Counter-attack on queenside</div>
+                <div class="bad-example">Passively defending without creating any threats</div>
+            </div>
+            <div class="category-badge">DEFENSE</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">12</div>
+                <div class="principle-title">Improve Your Worst Piece</div>
+            </div>
+            <div class="principle-description">
+                When you don't have an obvious plan, look at your pieces and identify the worst-placed one. Improve
+                its position. Is a knight on the rim? Reroute it to the center. Is a bishop blocked? Reposition it.
+                Is a rook passive? Find an open file. This simple principle always gives you something useful to do.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">Knight on a3? Reroute via b1-d2-f3-e5</div>
+                <div class="good-example">Rook on a1 with no open files? Swing to kingside via a3-g3</div>
+                <div class="bad-example">Leaving poorly placed pieces inactive throughout the game</div>
+            </div>
+            <div class="category-badge">PIECE IMPROVEMENT</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">13</div>
+                <div class="principle-title">Prophylaxis: Stop Opponent's Plans</div>
+            </div>
+            <div class="principle-description">
+                Don't just focus on your own plans—pay attention to what your opponent wants to do! If you see your
+                opponent is planning something dangerous, prevent it. This is called prophylaxis (preventive thinking).
+                Ask: "What is my opponent threatening? How can I stop it?"
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">Opponent wants to play ...e5? Play d5 to prevent it</div>
+                <div class="good-example">Opponent's knight heading to d5? Control that square with pawns</div>
+                <div class="bad-example">Only thinking about your plans and being surprised by opponent's ideas</div>
+            </div>
+            <div class="category-badge">PREVENTIVE THINKING</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">14</div>
+                <div class="principle-title">Control Key Squares</div>
+            </div>
+            <div class="principle-description">
+                In the middlegame, certain squares become critically important based on the pawn structure—usually
+                squares in or near the center that can't be attacked by pawns. Fight to control these squares with
+                pieces, and occupy them when possible. Controlling key squares restricts your opponent's pieces.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Example:</div>
+                <div class="good-example">Control d5 square to prevent opponent's pieces from occupying it</div>
+                <div class="good-example">Dominate the e4 square in a French Defense structure</div>
+                <div class="bad-example">Allowing opponent's pieces to freely occupy strong central squares</div>
+            </div>
+            <div class="category-badge">POSITIONAL PLAY</div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <div class="principle-number">15</div>
+                <div class="principle-title">Calculate Forcing Sequences</div>
+            </div>
+            <div class="principle-description">
+                Before making a tactical move, calculate forcing sequences (checks, captures, threats) to see if
+                your idea works. Calculate your opponent's best defenses. Don't rely on hope—verify with concrete
+                calculation. This prevents blunders and helps you find winning combinations.
+            </div>
+            <div class="example-box">
+                <div class="example-title">Calculation Method:</div>
+                <div class="good-example">1. Identify candidate moves (checks, captures, threats)</div>
+                <div class="good-example">2. Calculate forcing variations 3-5 moves deep</div>
+                <div class="good-example">3. Look for opponent's best defense</div>
+                <div class="bad-example">Making tactical moves based on instinct without calculating</div>
+            </div>
+            <div class="category-badge">CALCULATION</div>
+        </div>
+
+        <div style="margin-top: 50px; padding-top: 30px; border-top: 3px double #8b7355;">
+            <a href="index.html" class="back-link">← Back to Trainer</a>
+        </div>
+    </div>
+</body>
+</html>
