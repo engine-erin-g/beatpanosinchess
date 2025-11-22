@@ -89,6 +89,24 @@ registerOpening({
             computerMoves: {
                 playAsBlack: ['e4', 'Qh5', 'Qh4', 'f4', 'fxe5', 'Nf3', 'Qg3', 'Nc3']
             }
+        },
+
+        'e4-Nf3-e5-d4': {
+            name: 'e4-Nf3-e5-d4',
+
+            sequences: {
+                playAsBlack: [
+                    { move: null, instruction: "You are black. Let's learn the Two Knights Variation with e5 advance. Wait for white's first move." },
+                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
+                    { move: 'd5', instruction: "Good! White plays Nf3. Play d5 to challenge the center!" },
+                    { move: 'Bg4', instruction: "Excellent! White plays e5 (advancing the pawn). Develop your bishop to g4, pinning the knight!" },
+                    { move: 'e6', instruction: "Perfect! White plays d4 to support the center. Play e6 to solidify your position and prepare to develop!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsBlack: ['e4', 'Nf3', 'e5', 'd4']
+            }
         }
     }
 });

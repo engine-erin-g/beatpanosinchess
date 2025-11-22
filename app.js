@@ -23,9 +23,9 @@ let audioContext = null;
 // CONSTANTS
 // ============================================================================
 
-// Chess piece Unicode characters (using filled symbols for consistent sizing)
+// Chess piece Unicode characters (outlined for white, filled for black)
 const pieces = {
-    'wK': '♚', 'wQ': '♛', 'wR': '♜', 'wB': '♝', 'wN': '♞', 'wP': '♟',
+    'wK': '♔', 'wQ': '♕', 'wR': '♖', 'wB': '♗', 'wN': '♘', 'wP': '♙',
     'bK': '♚', 'bQ': '♛', 'bR': '♜', 'bB': '♝', 'bN': '♞', 'bP': '♟'
 };
 

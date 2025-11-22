@@ -198,10 +198,9 @@ h1 {
     background-color: #7fc97f !important;
 }
 
-/* Piece colors - using filled symbols with CSS coloring for consistent sizing */
+/* Piece colors - using outlined Unicode for white, filled for black */
 .square.white-piece {
-    color: #fff;
-    text-shadow: 0 0 2px #000, 0 0 2px #000, 1px 1px 1px #000;
+    color: #000;
 }
 
 .square.black-piece {
