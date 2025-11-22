@@ -140,6 +140,26 @@ registerOpening({
             computerMoves: {
                 playAsWhite: ['e5', 'Nf6', 'Nxe4', 'Bc5', 'Bxf2', 'O-O', 'Ng3+', 'Bxg3', 'Qe8', 'g6', 'hxg6']
             }
+        },
+
+        'g6-Bg7-d6-Kd7-Kxf7-Kf8': {
+            name: 'g6-Bg7-d6-Nd7-Kxf7-Kf8',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "Italian game!" },
+                    { move: 'd4', instruction: "He played g6? --> Modern defense!" },
+                    { move: 'Nf3', instruction: "Excellent! Black plays Bg7. Develop your knight to f3!" },
+                    { move: 'Bc4', instruction: "Perfect! Black plays d6. Develop your bishop to c4, targeting f7!" },
+                    { move: 'Bxf7+', instruction: "Sacrifice your bishop with And ruin their plan" },
+                    { move: 'Ng5+', instruction: "Well done! Black captures Kxf7. Play Ng5+ to give check!" },
+                    { move: 'Ne6', instruction: "Excellent! Black retreats Kf8. Fork the queen with Ne6! White wins the queen!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['g6', 'Bg7', 'd6', 'Nd7', 'Kxf7', 'Kf8']
+            }
         }
     }
 });
