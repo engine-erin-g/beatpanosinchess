@@ -9,10 +9,10 @@ registerOpening({
     id: 'italian-game',
     name: 'Italian Game',
 
-    // Variations
+    // Variations (alphabetically ordered A→Z)
     variations: {
         'e5-d6': {
-            name: 'e5, d6, exd4, Nf6, Be7, O-O',
+            name: 'e5-d6-exd4-Nf6-Be7-O-O',
 
             sequences: {
                 playAsWhite: [
@@ -31,49 +31,8 @@ registerOpening({
             }
         },
 
-        'e5-Nc6-Bc5': {
-            name: 'e5, Nc6, Bc5, exd4, Bb4',
-
-            sequences: {
-                playAsWhite: [
-                    { move: 'e4', instruction: "You are white. Let's learn the Italian Game. Start with e4, controlling the center." },
-                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
-                    { move: 'Bc4', instruction: "Excellent! Black plays Nc6. Develop your bishop to c4, pressuring the king and preparing to castle." },
-                    { move: 'c3', instruction: "Perfect! Black plays Bc5. Play c3 to prepare for the center push!" },
-                    { move: 'd4', instruction: "Great! Black plays d6. Push d4 to open up the center!" },
-                    { move: 'cxd4', instruction: "Well done! Black captures exd4. Recapture with your c-pawn cxd4!" },
-                    { move: 'Nc3', instruction: "Excellent! Black plays Bb4. Develop your knight to c3. White has a fair advantage!" }
-                ]
-            },
-
-            computerMoves: {
-                playAsWhite: ['e5', 'Nc6', 'Bc5', 'd6', 'exd4', 'Bb4']
-            }
-        },
-
-        'e5-Nc6-Nf6': {
-            name: 'e5, Nc6, Nf6',
-
-            sequences: {
-                playAsWhite: [
-                    { move: 'e4', instruction: "You are white. Let's learn the Italian Game. Start with e4, controlling the center." },
-                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
-                    { move: 'Bc4', instruction: "Excellent! Black plays Nc6. Develop your bishop to c4, targeting f7!" },
-                    { move: 'Ng5', instruction: "Perfect! Black plays Nf6. Attack f7 with Ng5!" },
-                    { move: 'exd5', instruction: "Great! Black plays d5. Capture exd5!" },
-                    { move: 'Nxf7', instruction: "Well done! Black captures Nxd5. Sacrifice your knight with Nxf7!" },
-                    { move: 'Qf3+', instruction: "Excellent! Black's king takes Kxf7. Play Qf3+ to give check!" },
-                    { move: 'Nc3', instruction: "Perfect! Black retreats Ke6. Develop your knight to c3 with a strong attack!" }
-                ]
-            },
-
-            computerMoves: {
-                playAsWhite: ['e5', 'Nc6', 'Nf6', 'd5', 'Nxd5', 'Kxf7', 'Ke6']
-            }
-        },
-
         'e5-d6-Nc6-Nd4': {
-            name: 'e5-d6-Nc6-Nd4',
+            name: 'e5-d6-Nc6-Nd4-exd4-Nf6-c6-bxc6-Bd7',
 
             sequences: {
                 playAsWhite: [
@@ -95,8 +54,71 @@ registerOpening({
             }
         },
 
+        'e5-Nc6-Bc5': {
+            name: 'e5-Nc6-Bc5-exd4-Bb4',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "You are white. Let's learn the Italian Game. Start with e4, controlling the center." },
+                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
+                    { move: 'Bc4', instruction: "Excellent! Black plays Nc6. Develop your bishop to c4, pressuring the king and preparing to castle." },
+                    { move: 'c3', instruction: "Perfect! Black plays Bc5. Play c3 to prepare for the center push!" },
+                    { move: 'd4', instruction: "Great! Black plays d6. Push d4 to open up the center!" },
+                    { move: 'cxd4', instruction: "Well done! Black captures exd4. Recapture with your c-pawn cxd4!" },
+                    { move: 'Nc3', instruction: "Excellent! Black plays Bb4. Develop your knight to c3. White has a fair advantage!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['e5', 'Nc6', 'Bc5', 'd6', 'exd4', 'Bb4']
+            }
+        },
+
+        'e5-Nc6-Nf6': {
+            name: 'e5-Nc6-Nf6-d5-Nxd5-Nxf7-Ke6',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "You are white. Let's learn the Italian Game. Start with e4, controlling the center." },
+                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
+                    { move: 'Bc4', instruction: "Excellent! Black plays Nc6. Develop your bishop to c4, targeting f7!" },
+                    { move: 'Ng5', instruction: "Perfect! Black plays Nf6. Attack f7 with Ng5!" },
+                    { move: 'exd5', instruction: "Great! Black plays d5. Capture exd5!" },
+                    { move: 'Nxf7', instruction: "Well done! Black captures Nxd5. Sacrifice your knight with Nxf7!" },
+                    { move: 'Qf3+', instruction: "Excellent! Black's king takes Kxf7. Play Qf3+ to give check!" },
+                    { move: 'Nc3', instruction: "Perfect! Black retreats Ke6. Develop your knight to c3 with a strong attack!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['e5', 'Nc6', 'Nf6', 'd5', 'Nxd5', 'Kxf7', 'Ke6']
+            }
+        },
+
+        'e5-Nc6-Nf6-b5-Ke7-d5-Nd4-Ke8-Nxb3': {
+            name: 'e5-Nc6-Nf6-b5-Ke7-d5-Nd4-Ke8-Nxb3',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "You are white. Let's learn the Fried Liver Attack! Start with e4." },
+                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
+                    { move: 'Bc4', instruction: "Excellent! Black plays Nc6. Develop your bishop to c4, targeting f7!" },
+                    { move: 'Ng5', instruction: "Perfect! Black plays Nf6. Attack f7 with Ng5, threatening the weak square!" },
+                    { move: 'Bxf7+', instruction: "Great! Black plays b5 (or anything except d5). Sacrifice the bishop with Bxf7+!" },
+                    { move: 'Bb3', instruction: "Well done! Black plays Ke7. Retreat the bishop to b3, maintaining pressure!" },
+                    { move: 'Nc3', instruction: "Excellent! Black plays d5. Develop your knight to c3, supporting the center!" },
+                    { move: 'Nxd5+', instruction: "Perfect! Black plays Nd4. Capture with Nxd5+, giving check!" },
+                    { move: 'Nxe3', instruction: "Great! Black plays Ke8. Capture the knight with Nxe3! White has won material!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['e5', 'Nc6', 'Nf6', 'b5', 'Ke7', 'd5', 'Nd4', 'Ke8', 'Nxb3']
+            }
+        },
+
         'copy-cat': {
-            name: 'Copy Cat',
+            name: 'e5-Nf6-Nxe4-Bc5-Bxf2-O-O-Ng3-Bxg3-Qe8-g6-hxg6',
 
             sequences: {
                 playAsWhite: [
