@@ -18,6 +18,7 @@ let openingSequence = [];
 let selectedSquare = null;
 let hintsEnabled = true;
 let audioContext = null;
+let lastMove = null; // Track last move for highlighting
 
 // ============================================================================
 // CONSTANTS
@@ -216,6 +217,7 @@ function initializeGame() {
     game = new Chess();
     currentStep = 0;
     selectedSquare = null;
+    lastMove = null; // Reset last move highlighting
 
     // Get the appropriate opening sequence
     const sequenceKey = userGoal + 'As' + userColor.charAt(0).toUpperCase() + userColor.slice(1);
@@ -330,6 +332,11 @@ function updateBoard() {
     const board = game.board();
     const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
+    // Clear last move highlighting first
+    document.querySelectorAll('.square').forEach(sq => {
+        sq.classList.remove('last-move-from', 'last-move-to');
+    });
+
     for (let rank = 0; rank < 8; rank++) {
         for (let file = 0; file < 8; file++) {
             const piece = board[rank][file];
@@ -347,6 +354,14 @@ function updateBoard() {
                 squareElement.classList.remove('white-piece', 'black-piece');
             }
         }
+    }
+
+    // Highlight last move
+    if (lastMove) {
+        const fromSquare = document.getElementById(lastMove.from);
+        const toSquare = document.getElementById(lastMove.to);
+        if (fromSquare) fromSquare.classList.add('last-move-from');
+        if (toSquare) toSquare.classList.add('last-move-to');
     }
 }
 
@@ -386,6 +401,9 @@ function handleSquareClick(squareId) {
         if (move) {
             // Play sound for all moves
             playMoveSound();
+
+            // Track last move for highlighting
+            lastMove = { from: move.from, to: move.to };
 
             updateBoard();
             checkUserMove(move.san);
@@ -605,6 +623,10 @@ function makeComputerMove(isInitialMove = false) {
         const move = game.move(moveSan);
         if (move) {
             playMoveSound();
+
+            // Track last move for highlighting
+            lastMove = { from: move.from, to: move.to };
+
             updateBoard();
             updateMoveHistory();
 
