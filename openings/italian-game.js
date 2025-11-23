@@ -59,9 +59,9 @@ registerOpening({
 
             sequences: {
                 playAsWhite: [
-                    { move: 'e4', instruction: "You are white. Let's learn the Italian Game. Start with e4, controlling the center." },
-                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
-                    { move: 'Bc4', instruction: "Excellent! Black plays Nc6. Develop your bishop to c4, pressuring the king and preparing to castle." },
+                    { move: 'e4', instruction: "Classic Italian" },
+                    { move: 'Nf3', instruction: "Still classic italian" },
+                    { move: 'Bc4', instruction: "Bishop c4 to pressure the king e7" },
                     { move: 'c3', instruction: "Perfect! Black plays Bc5. Play c3 to prepare for the center push!" },
                     { move: 'd4', instruction: "Great! Black plays d6. Push d4 to open up the center!" },
                     { move: 'cxd4', instruction: "Well done! Black captures exd4. Recapture with your c-pawn cxd4!" },
