@@ -12,7 +12,7 @@ registerOpening({
 
     // Variations (alphabetically ordered)
     variations: {
-        'e3-Bd3': {
+        'e3-Bd3-c4-cxd5': {
             name: 'e3-Bd3-c4-cxd5',
 
             sequences: {
@@ -30,7 +30,7 @@ registerOpening({
             }
         },
 
-        'e4-Bc4': {
+        'e4-Bc4-cxd5-Bd3': {
             name: 'e4-Bc4-cxd5-Bd3',
 
             sequences: {
@@ -39,7 +39,7 @@ registerOpening({
                     { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
                     { move: 'd5', instruction: "Good! White plays Bc4. Play d5 to challenge the center and attack the bishop!" },
                     { move: 'cxd5', instruction: "Excellent! White captures exd5. Recapture with cxd5!" },
-                    { move: 'Bf5', instruction: "Perfect! White retreats Bd3. Develop your bishop to f5 - the classic Caro-Kann bishop!" }
+                    { move: 'e5', instruction: "Perfect! White retreats Bd3. Develop your bishop to f5 - the classic Caro-Kann bishop!" }
                 ]
             },
 
@@ -48,7 +48,7 @@ registerOpening({
             }
         },
 
-        'e4-d4-e5': {
+        'e4-d4-e5-dxc5-Nf3-Be2-O-O': {
             name: 'e4-d4-e5-dxc5-Nf3-Be2-O-O',
 
             sequences: {
