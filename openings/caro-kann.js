@@ -69,6 +69,29 @@ registerOpening({
             }
         },
 
+        'e4-d4-e5-Nf3-dxc5-Bb5-Bg5-Qe2-Qxf2': {
+            name: 'e4-d4-e5-Nf3-dxc5-Bb5-Bg5-Qe2-Qxf2',
+
+            sequences: {
+                playAsBlack: [
+                    { move: null, instruction: "You are black. Let's learn a tactical Advance Variation line. Wait for white's first move." },
+                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
+                    { move: 'd5', instruction: "Good! White plays d4. Play d5 to challenge the center!" },
+                    { move: 'c5', instruction: "Excellent! White plays e5 (Advance Variation). Strike at the center with c5!" },
+                    { move: 'Nc6', instruction: "Perfect! White plays Nf3. Develop your knight to c6!" },
+                    { move: 'e6', instruction: "Great! White captures dxc5. Play e6 to prepare your bishop development!" },
+                    { move: 'Bxc5', instruction: "Well done! White plays Bd5. Capture Bxc5 to reclaim your pawn!" },
+                    { move: 'Qb6', instruction: "Excellent! White plays Bg5. Develop your queen to b6, attacking b2 and putting pressure on white!" },
+                    { move: 'Bxf2+', instruction: "Perfect! White plays Qe2. Now sacrifice your bishop with Bxf2+! This gives you a strong initiative!" },
+                    { move: 'Qxb5', instruction: "Brilliant! White recaptures Qxf2. Capture the b2 pawn with check: Qxb2! You've gained material and disrupted white's position!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsBlack: ['e4', 'd4', 'e5', 'Nf3', 'dxc5', 'Bb5', 'Bg5', 'Qe2', 'Qxf2']
+            }
+        },
+
         'e4-Nf3-e5-d4': {
             name: 'e4-Nf3-e5-d4',
 
