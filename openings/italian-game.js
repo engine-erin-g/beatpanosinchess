@@ -11,7 +11,7 @@ registerOpening({
 
     // Variations (alphabetically ordered A→Z)
     variations: {
-        'e5-d6': {
+        'e5-d6-exd4-Nf6-Be7-O-O': {
             name: 'e5-d6-exd4-Nf6-Be7-O-O',
 
             sequences: {
@@ -31,7 +31,7 @@ registerOpening({
             }
         },
 
-        'e5-d6-Nc6-Nd4': {
+        'e5-d6-Nc6-Nd4-exd4-Nf6-c6-bxc6-Bd7': {
             name: 'e5-d6-Nc6-Nd4-exd4-Nf6-c6-bxc6-Bd7',
 
             sequences: {
@@ -54,7 +54,7 @@ registerOpening({
             }
         },
 
-        'e5-Nc6-Bc5': {
+        'e5-Nc6-Bc5-exd4-Bb4': {
             name: 'e5-Nc6-Bc5-exd4-Bb4',
 
             sequences: {
@@ -74,7 +74,7 @@ registerOpening({
             }
         },
 
-        'e5-Nc6-Nf6': {
+        'e5-Nc6-Nf6-d5-Nxd5-Nxf7-Ke6': {
             name: 'e5-Nc6-Nf6-d5-Nxd5-Nxf7-Ke6',
 
             sequences: {
@@ -117,7 +117,25 @@ registerOpening({
             }
         },
 
-        'copy-cat': {
+        'd6-Nf6-e5-Nbd7': {
+            name: 'd6-Nf6-e5-Nbd7',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "Classic Italian" },
+                    { move: 'd4', instruction: "Control center" },
+                    { move: 'Nc3', instruction: "Protect while developing Knights" },
+                    { move: 'Nf3', instruction: "Protect while developing Knights" },
+                    { move: 'Bc4', instruction: "Middle game principles: (1)Control the center (2)Develop all pieces quickly (3)Castle (4)Connect rooks (5)Rooks on open files (6)Avoid same piece twice (7)Improve your worst-placed piece (8)Restrict opponents best pieces." }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['d6', 'Nf6', 'e5', 'Nbd7']
+            }
+        },
+
+        'e5-Nf6-Nxe4-Bc5-Bxf2-O-O-Ng3-Bxg3-Qe8-g6-hxg6': {
             name: 'e5-Nf6-Nxe4-Bc5-Bxf2-O-O-Ng3-Bxg3-Qe8-g6-hxg6',
 
             sequences: {
