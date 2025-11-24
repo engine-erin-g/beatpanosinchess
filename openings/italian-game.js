@@ -160,6 +160,26 @@ registerOpening({
             computerMoves: {
                 playAsWhite: ['g6', 'Bg7', 'd6', 'Nd7', 'Kxf7', 'Kf8']
             }
+        },
+
+        'Nf6-Nd5-d6-Nb6': {
+            name: 'Nf6-Nd5-d6-Nb6-dxe5-Bf5',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "You are white. Start with e4 in this Italian Game variation." },
+                    { move: 'e5', instruction: "Good! Black plays Nf6. Push e5 to attack the knight!" },
+                    { move: 'd4', instruction: "Perfect! Black retreats Nd5. Play d4 to control the center!" },
+                    { move: 'c4', instruction: "Excellent! Black plays d6. Play c4 to attack the knight on d5!" },
+                    { move: 'f4', instruction: "Well done! Black retreats Nb6. Push f4 to strengthen the center!" },
+                    { move: 'fxe5', instruction: "Great! Black captures dxe5. Recapture with fxe5!" },
+                    { move: 'Nf3', instruction: "Excellent! Black plays Bf5. Develop your knight to f3. White has a strong central position!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['Nf6', 'Nd5', 'd6', 'Nb6', 'dxe5', 'Bf5']
+            }
         }
     }
 });
