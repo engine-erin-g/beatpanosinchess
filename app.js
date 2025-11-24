@@ -57,7 +57,7 @@ function playMoveSound() {
         // Generate white noise with decay for wood impact
         for (let i = 0; i < bufferSize; i++) {
             const decay = Math.exp(-i / (bufferSize * 0.3));
-            data[i] = (Math.random() * 2 - 1) * decay * 0.3;
+            data[i] = (Math.random() * 2 - 1) * decay * 0.6;
         }
 
         const noiseSource = audioContext.createBufferSource();
@@ -70,7 +70,7 @@ function playMoveSound() {
         filter.Q.value = 3;
 
         const gainNode = audioContext.createGain();
-        gainNode.gain.setValueAtTime(0.4, audioContext.currentTime);
+        gainNode.gain.setValueAtTime(0.7, audioContext.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.08);
 
         noiseSource.connect(filter);
