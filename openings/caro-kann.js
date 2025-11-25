@@ -12,6 +12,24 @@ registerOpening({
 
     // Variations (alphabetically ordered)
     variations: {
+        'c4-Nc3-e4-Nce2': {
+            name: 'c4-Nc3-e4-Nce2',
+
+            sequences: {
+                playAsBlack: [
+                    { move: null, instruction: "You are black. Let's learn how to handle the English Opening approach to Caro-Kann structures. Wait for white's first move." },
+                    { move: 'c6', instruction: "White plays c4 (English Opening). Respond with c6, preparing d5!" },
+                    { move: 'd5', instruction: "Good! White plays Nc3. Play d5 to challenge the center!" },
+                    { move: 'd4', instruction: "Excellent! White plays e4, transposing to a Caro-Kann structure. Play d4! This advances your pawn and gains space!" },
+                    { move: 'e5', instruction: "Perfect! White plays Nce2. Play e5 to establish a strong pawn center and control key squares!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsBlack: ['c4', 'Nc3', 'e4', 'Nce2']
+            }
+        },
+
         'e3-Bd3-c4-cxd5': {
             name: 'e3-Bd3-c4-cxd5',
 
