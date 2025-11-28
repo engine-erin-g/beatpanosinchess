@@ -11,6 +11,24 @@ registerOpening({
 
     // Variations (alphabetically ordered A→Z)
     variations: {
+        'd6-Nf6-e5-Nbd7': {
+            name: 'd6-Nf6-e5-Nbd7',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "Classic Italian" },
+                    { move: 'd4', instruction: "Control center" },
+                    { move: 'Nc3', instruction: "Protect while developing Knights" },
+                    { move: 'Nf3', instruction: "Protect while developing Knights" },
+                    { move: 'Bc4', instruction: "Middle game principles: (1)Control the center (2)Develop all pieces quickly (3)Castle (4)Connect rooks (5)Rooks on open files (6)Avoid same piece twice (7)Improve your worst-placed piece (8)Restrict opponents best pieces." }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['d6', 'Nf6', 'e5', 'Nbd7']
+            }
+        },
+
         'e5-d6-exd4-Nf6-Be7-O-O': {
             name: 'e5-d6-exd4-Nf6-Be7-O-O',
 
@@ -114,24 +132,6 @@ registerOpening({
 
             computerMoves: {
                 playAsWhite: ['e5', 'Nc6', 'Nf6', 'b5', 'Ke7', 'd5', 'Nd4', 'Ke8', 'Nxb3']
-            }
-        },
-
-        'd6-Nf6-e5-Nbd7': {
-            name: 'd6-Nf6-e5-Nbd7',
-
-            sequences: {
-                playAsWhite: [
-                    { move: 'e4', instruction: "Classic Italian" },
-                    { move: 'd4', instruction: "Control center" },
-                    { move: 'Nc3', instruction: "Protect while developing Knights" },
-                    { move: 'Nf3', instruction: "Protect while developing Knights" },
-                    { move: 'Bc4', instruction: "Middle game principles: (1)Control the center (2)Develop all pieces quickly (3)Castle (4)Connect rooks (5)Rooks on open files (6)Avoid same piece twice (7)Improve your worst-placed piece (8)Restrict opponents best pieces." }
-                ]
-            },
-
-            computerMoves: {
-                playAsWhite: ['d6', 'Nf6', 'e5', 'Nbd7']
             }
         },
 
