@@ -268,9 +268,9 @@ h1 {
 .golden-rules summary {
     color: #3d2817;
     font-weight: normal;
-    font-size: 1.1em;
+    font-size: 0.95em;
     border-bottom: 2px solid #8b7355;
-    padding: 12px 15px;
+    padding: 8px 12px;
     cursor: pointer;
     user-select: none;
     list-style: none;
@@ -283,9 +283,9 @@ h1 {
 .golden-rules summary::before {
     content: '▼';
     display: inline-block;
-    margin-right: 8px;
+    margin-right: 6px;
     transition: transform 0.2s;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .golden-rules[open] summary::before {
@@ -301,17 +301,17 @@ h1 {
 }
 
 .golden-rules-content {
-    padding: 15px;
+    padding: 10px;
 }
 
 .golden-rule {
     display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 12px;
-    padding: 8px;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    padding: 4px 6px;
     background: #fefdfb;
-    border-left: 3px solid #8b7355;
+    border-left: 2px solid #8b7355;
 }
 
 .golden-rule:last-child {
@@ -319,18 +319,18 @@ h1 {
 }
 
 .rule-letter {
-    flex: 0 0 30px;
-    font-size: 1.5em;
+    flex: 0 0 16px;
+    font-size: 0.75em;
     font-weight: bold;
     color: #8b7355;
     font-family: 'Georgia', 'Times New Roman', serif;
+    text-align: center;
 }
 
 .rule-text {
-    font-size: 0.9em;
+    font-size: 0.75em;
     color: #3d2817;
-    line-height: 1.4;
-    padding-top: 3px;
+    line-height: 1.3;
     font-family: 'Georgia', 'Times New Roman', serif;
 }
 
@@ -358,17 +358,17 @@ h3 {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #8b7355;
-    padding-bottom: 10px;
-    margin-bottom: 12px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .toggle-label {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     cursor: pointer;
     user-select: none;
-    font-size: 0.9em;
+    font-size: 0.85em;
 }
 
 .toggle-label input[type="checkbox"] {
@@ -412,39 +412,39 @@ h3 {
 
 .instruction-box {
     background: #faf9f7;
-    padding: 18px;
+    padding: 12px 15px;
     border: 2px solid #8b7355;
 }
 
 #instruction-text {
     color: #3d2817;
-    font-size: 1.05em;
-    line-height: 1.6;
+    font-size: 0.95em;
+    line-height: 1.4;
     font-style: italic;
 }
 
 .move-history {
     background: #faf9f7;
-    padding: 15px;
+    padding: 12px;
     border: 2px solid #8b7355;
     flex-grow: 0;
-    max-height: 280px;
+    max-height: 180px;
     overflow-y: auto;
 }
 
 #moves-list {
     color: #3d2817;
     font-family: 'Courier New', monospace;
-    font-size: 0.95em;
-    line-height: 1.7;
+    font-size: 0.85em;
+    line-height: 1.5;
 }
 
 .reset-button {
     background: #8b7355;
     color: #fefdfb;
     border: 2px solid #6d5a44;
-    padding: 14px 28px;
-    font-size: 1em;
+    padding: 10px 20px;
+    font-size: 0.95em;
     font-family: 'Georgia', serif;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -467,9 +467,9 @@ h3 {
 .resource-links summary {
     color: #3d2817;
     font-weight: normal;
-    font-size: 1.1em;
+    font-size: 0.95em;
     border-bottom: 2px solid #8b7355;
-    padding: 12px 15px;
+    padding: 8px 12px;
     cursor: pointer;
     user-select: none;
     list-style: none;
@@ -482,9 +482,9 @@ h3 {
 .resource-links summary::before {
     content: '▼';
     display: inline-block;
-    margin-right: 8px;
+    margin-right: 6px;
     transition: transform 0.2s;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .resource-links[open] summary::before {
@@ -502,8 +502,8 @@ h3 {
 .resource-links-content {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 15px;
+    gap: 6px;
+    padding: 10px;
 }
 
 .resource-link {
@@ -511,12 +511,12 @@ h3 {
     text-decoration: none;
     font-weight: bold;
     border: 2px solid #8b7355;
-    padding: 10px 15px;
+    padding: 8px 12px;
     display: block;
     background: #fefdfb;
     text-align: center;
     transition: all 0.2s ease;
-    font-size: 0.95em;
+    font-size: 0.85em;
 }
 
 .resource-link:hover {
