@@ -41,19 +41,18 @@
             </div>
 
             <div class="info-container">
-                <div class="hints-toggle">
-                    <label class="toggle-label">
-                        <input type="checkbox" id="hints-toggle" checked>
-                        <span class="toggle-text">Show Hints</span>
-                    </label>
-                </div>
-
                 <div id="instruction-box" class="instruction-box">
                     <p id="instruction-text">Select your preferences above and make your first move...</p>
                 </div>
 
                 <div id="move-history" class="move-history">
-                    <h3>Move History</h3>
+                    <div class="move-history-header">
+                        <h3>Move History</h3>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="hints-toggle" checked>
+                            <span class="toggle-text">Show Hints</span>
+                        </label>
+                    </div>
                     <div id="moves-list">No moves yet</div>
                 </div>
 
