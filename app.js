@@ -43,7 +43,7 @@ function initAudio() {
     }
 }
 
-function playMoveSound() {
+async function playMoveSound() {
     try {
         if (!audioContext) {
             initAudio();
@@ -51,7 +51,7 @@ function playMoveSound() {
 
         // Resume audio context if suspended (required by modern browsers)
         if (audioContext.state === 'suspended') {
-            audioContext.resume();
+            await audioContext.resume();
         }
 
         // Create a realistic wood-on-wood sound using noise and filters
