@@ -92,6 +92,31 @@ registerOpening({
             }
         },
 
+        'e5-Nc6-Nf6-d5-Nxd5-Kxf7-Ke8-Qf6-bxc6-g6': {
+            name: 'e5-Nc6-Nf6-d5-Nxd5-Kxf7-Ke8-Qf6-bxc6-g6',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "You are white. Let's learn a Fried Liver variation. Start with e4." },
+                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
+                    { move: 'Bc4', instruction: "Excellent! Black plays Nc6. Develop your bishop to c4!" },
+                    { move: 'Ng5', instruction: "Perfect! Black plays Nf6. Attack f7 with Ng5!" },
+                    { move: 'exd5', instruction: "Great! Black plays d5. Capture exd5!" },
+                    { move: 'Nxd5', instruction: "Good! Black captures Nxd5. Capture the knight!" },
+                    { move: 'Nxf7', instruction: "Perfect! Black plays Nxd5. Sacrifice your knight with Nxf7!" },
+                    { move: 'Qf3+', instruction: "Excellent! Black takes Kxf7. Check with Qf3+!" },
+                    { move: 'Bxd5', instruction: "Good! Black retreats Ke8. Capture the knight with Bxd5!" },
+                    { move: 'Bxc6+', instruction: "Perfect! Black plays Qf6. Take the knight with check Bxc6+!" },
+                    { move: 'Qh5+', instruction: "Excellent! Black recaptures bxc6. Give check with Qh5+!" },
+                    { move: 'Qe2', instruction: "Great! Black plays g6. Play Qe2 to maintain pressure. White has a winning advantage!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['e5', 'Nc6', 'Nf6', 'd5', 'Nxd5', 'Nxd5', 'Kxf7', 'Ke8', 'Qf6', 'bxc6', 'g6']
+            }
+        },
+
         'e5-Nc6-Nf6-d5-Nxd5-Nxf7-Ke6': {
             name: 'e5-Nc6-Nf6-d5-Nxd5-Nxf7-Ke6',
 
