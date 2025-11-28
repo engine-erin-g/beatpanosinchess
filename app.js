@@ -49,6 +49,11 @@ function playMoveSound() {
             initAudio();
         }
 
+        // Resume audio context if suspended (required by modern browsers)
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+
         // Create a realistic wood-on-wood sound using noise and filters
         const bufferSize = audioContext.sampleRate * 0.08; // 80ms of audio
         const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
