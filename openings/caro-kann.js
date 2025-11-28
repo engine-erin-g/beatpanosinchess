@@ -170,6 +170,25 @@ registerOpening({
             }
         },
 
+        'e4-f4-e5-d4-Nc3': {
+            name: 'e4-f4-e5-d4-Nc3',
+
+            sequences: {
+                playAsBlack: [
+                    { move: null, instruction: "You are black. Let's learn to respond to the King's Gambit approach to the Caro-Kann. Wait for white's first move." },
+                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
+                    { move: 'd5', instruction: "Good! White plays f4 (aggressive King's Gambit style). Play d5 to challenge the center!" },
+                    { move: 'Bf5', instruction: "Excellent! White plays e5, gaining space. Develop your bishop to f5 - the classic Caro-Kann bishop!" },
+                    { move: 'e6', instruction: "Perfect! White plays d4, establishing a strong center. Play e6 to solidify your position!" },
+                    { move: 'c5', instruction: "Great! White develops Nc3. Strike at the center with c5! You're counterattacking white's pawn chain!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsBlack: ['e4', 'f4', 'e5', 'd4', 'Nc3']
+            }
+        },
+
         'e4-Qh5-Qf3-Bc4': {
             name: 'e4-Qh5-Qf3-Bc4-exd5-Bb3-d3-Qe1',
 
