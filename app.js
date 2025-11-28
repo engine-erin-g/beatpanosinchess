@@ -653,7 +653,7 @@ function showInstruction() {
     if (currentStep < openingSequence.length) {
         document.getElementById('instruction-text').textContent = openingSequence[currentStep].instruction;
     } else {
-        document.getElementById('instruction-text').textContent = "Great job! You've completed this opening tutorial. Click 'Start Over' to practice again.";
+        document.getElementById('instruction-text').textContent = "Great job! You've completed this opening tutorial. Click 'Reset Board' to practice again.";
     }
 }
 
