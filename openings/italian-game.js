@@ -136,7 +136,7 @@ registerOpening({
         },
 
         'e5-Nf6-Nc6-dxc6': {
-            name: 'e5-Nf6-Nc6-b xc6',
+            name: 'e5-Nf6-Nc6-dxc6',
 
             sequences: {
                 playAsWhite: [
@@ -150,6 +150,24 @@ registerOpening({
 
             computerMoves: {
                 playAsWhite: ['e5', 'Nf6', 'Nc6', 'bxc6']
+            }
+        },
+
+        'e5-Nf6-Nxe4-Qe7': {
+            name: 'e5-Nf6-Nxe4-Qe7',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "You are white. Let's learn the Petrov Defense. Start with e4." },
+                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
+                    { move: 'Nxe5', instruction: "Excellent! Black plays Nf6 (Petrov Defense). Capture the pawn with Nxe5!" },
+                    { move: 'Qe2', instruction: "Perfect! Black plays Nxe4, attacking your knight. Play Qe2 to pin the knight!" },
+                    { move: 'Qxe4', instruction: "Great! Black plays Qe7. Capture the knight with Qxe4! You've won the knight!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['e5', 'Nf6', 'Nxe4', 'Qe7']
             }
         },
 
