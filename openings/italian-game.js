@@ -135,31 +135,6 @@ registerOpening({
             }
         },
 
-        'e5-Nf6-Nxe4-Bc5-Bxf2-O-O-Ng3-Bxg3-Qe8-g6-hxg6': {
-            name: 'e5-Nf6-Nxe4-Bc5-Bxf2-O-O-Ng3-Bxg3-Qe8-g6-hxg6',
-
-            sequences: {
-                playAsWhite: [
-                    { move: 'e4', instruction: "You are white. Let's learn the Italian Game Copy Cat variation. Start with e4." },
-                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
-                    { move: 'd4', instruction: "Excellent! Black plays Nf6 - this is an indicator that we need to do the modern attack d4!" },
-                    { move: 'dxe5', instruction: "Well done! Black plays Nxe4. Time to put their knight in prison with dxe5!" },
-                    { move: 'Bc4', instruction: "Great! Black plays Bc5, attacking the king via f2. Develop your bishop to c4, attacking f7!" },
-                    { move: 'Kf1', instruction: "Perfect! Black plays Bd4, centralizing the bishop. Move Kf1 to escape and prepare your attack!" },
-                    { move: 'Qd5', instruction: "Excellent! Black castles. Time to bring the queen to play with Qd5!" },
-                    { move: 'hxg3', instruction: "Good! Black plays Ng3, attacking your rook. Capture with hxg3!" },
-                    { move: 'Bg5', instruction: "Well done! Black plays Bxg3. Open up the h file! Play Bg5, attacking their queen!" },
-                    { move: 'Qe4', instruction: "Great! Black plays Qe8. Play Qd4, preparing the queen sacrifice!" },
-                    { move: 'Qxg6+', instruction: "Perfect! Black plays g6. Time to sacrifice the queen with Qxg7!" },
-                    { move: 'Bf6', instruction: "Excellent! Black captures hxg7. The h file is open! Play Bf6 for checkmate!" }
-                ]
-            },
-
-            computerMoves: {
-                playAsWhite: ['e5', 'Nf6', 'Nxe4', 'Bc5', 'Bxf2', 'O-O', 'Ng3+', 'Bxg3', 'Qe8', 'g6', 'hxg6']
-            }
-        },
-
         'g6-Bg7-d6-Kd7-Kxf7-Kf8': {
             name: 'g6-Bg7-d6-Nd7-Kxf7-Kf8',
 
