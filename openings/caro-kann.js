@@ -150,6 +150,24 @@ registerOpening({
             }
         },
 
+        'e4-d4-Nc3-Nxe4': {
+            name: 'e4-d4-Nc3-Nxe4',
+
+            sequences: {
+                playAsBlack: [
+                    { move: null, instruction: "You are black. Let's learn the Classical Variation of the Caro-Kann. Wait for white's first move." },
+                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
+                    { move: 'd5', instruction: "Good! White plays d4. Play d5 to challenge the center!" },
+                    { move: 'dxe4', instruction: "Excellent! White plays Nc3. Capture dxe4 to trade in the center!" },
+                    { move: 'Bf5', instruction: "Perfect! White plays Nxe4. Develop your bishop to f5 - the classic Caro-Kann bishop!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsBlack: ['e4', 'd4', 'Nc3', 'Nxe4']
+            }
+        },
+
         'e4-d4-Nc3-Nxe4-Nxf6-c3': {
             name: 'e4-d4-Nc3-Nxe4-Nxf6-c3',
 
