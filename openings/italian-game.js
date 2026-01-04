@@ -92,6 +92,26 @@ registerOpening({
             }
         },
 
+        'e5-Nc6-f5-exd4-d6-cxd6': {
+            name: 'e5-Nc6-f5-exd4-d6-cxd6',
+
+            sequences: {
+                playAsWhite: [
+                    { move: 'e4', instruction: "You are white. Let's learn the Italian Game. Start with e4." },
+                    { move: 'Nf3', instruction: "Good! Black plays e5. Develop your knight to f3." },
+                    { move: 'Bc4', instruction: "Excellent! Black plays Nc6. Develop your bishop to c4, targeting f7!" },
+                    { move: 'd4', instruction: "f5 is an inaccuracy. Play d4 to open up the center and take advantage!" },
+                    { move: 'e5', instruction: "Perfect! Black captures exd4. Push e5 to attack and gain space!" },
+                    { move: 'exd6', instruction: "Great! Black plays d6, trying to open lines. Capture exd6!" },
+                    { move: 'O-O', instruction: "Well done! Black recaptures cxd6. Castle kingside to safety. White has a strong position!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsWhite: ['e5', 'Nc6', 'f5', 'exd4', 'd6', 'cxd6']
+            }
+        },
+
         'e5-Nc6-Nf6-d5-Nxd5-Nxf7-Ke6': {
             name: 'e5-Nc6-Nf6-d5-Nxd5-Nxf7-Ke6',
 
