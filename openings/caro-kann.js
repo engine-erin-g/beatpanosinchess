@@ -168,6 +168,23 @@ registerOpening({
             }
         },
 
+        'e4-e5-exd6': {
+            name: 'e4-e5-exd6',
+
+            sequences: {
+                playAsBlack: [
+                    { move: null, instruction: "You are black. Let's learn how to handle the aggressive e5 push. Wait for white's first move." },
+                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
+                    { move: 'd6', instruction: "White plays e5 aggressively, trying to gain space. Counter with d6 to challenge the pawn!" },
+                    { move: 'exd6', instruction: "Perfect! White captures exd6. Recapture with exd6 to open the e-file and develop your pieces!" }
+                ]
+            },
+
+            computerMoves: {
+                playAsBlack: ['e4', 'e5', 'exd6']
+            }
+        },
+
         'e4-f4-e5-d4-Nc3': {
             name: 'e4-f4-e5-d4-Nc3',
 
