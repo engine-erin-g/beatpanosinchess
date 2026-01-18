@@ -99,6 +99,59 @@
                         </a>
                     </div>
                 </details>
+
+                <button id="create-combination-btn" class="create-combination-button">+ Create New Combination</button>
+                <a href="manage-combinations.html" class="manage-combinations-link">Manage Combinations</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Combination Modal -->
+    <div id="combination-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Combination</h2>
+                <button id="modal-close" class="modal-close">&times;</button>
+            </div>
+
+            <div id="modal-step-1" class="modal-step">
+                <div class="modal-form-group">
+                    <label for="combo-color">Play as:</label>
+                    <select id="combo-color" class="modal-select">
+                        <option value="white">White</option>
+                        <option value="black">Black</option>
+                    </select>
+                </div>
+                <div class="modal-form-group">
+                    <label for="combo-opening">Opening:</label>
+                    <select id="combo-opening" class="modal-select">
+                        <option value="italian-game">Italian Game</option>
+                        <option value="caro-kann">Caro-Kann Defense</option>
+                    </select>
+                </div>
+                <button id="start-recording-btn" class="modal-button primary">Start Recording Moves</button>
+            </div>
+
+            <div id="modal-step-2" class="modal-step hidden">
+                <div class="recording-indicator">
+                    <span class="recording-dot"></span> Recording Mode
+                </div>
+                <div class="recording-board-container">
+                    <div id="recording-board" class="chess-board recording-board"></div>
+                </div>
+                <div class="recorded-moves">
+                    <h4>Recorded Moves:</h4>
+                    <div id="recorded-moves-list">No moves yet</div>
+                </div>
+                <div class="instruction-input-container">
+                    <label for="move-instruction">Instruction for last move:</label>
+                    <input type="text" id="move-instruction" class="modal-input" placeholder="Enter instruction for this move...">
+                    <button id="save-instruction-btn" class="modal-button small">Save Instruction</button>
+                </div>
+                <div class="modal-actions">
+                    <button id="undo-move-btn" class="modal-button secondary">Undo Last Move</button>
+                    <button id="finish-recording-btn" class="modal-button primary">Finish & Save</button>
+                </div>
             </div>
         </div>
     </div>

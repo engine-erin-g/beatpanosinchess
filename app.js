@@ -168,9 +168,16 @@ function updateVariationDropdown() {
     // Clear existing options
     variationSelect.innerHTML = '';
 
+    // Sort variations alphabetically by name
+    const sortedVariations = Object.entries(variations).sort((a, b) => {
+        const nameA = a[1].name.toLowerCase();
+        const nameB = b[1].name.toLowerCase();
+        return nameA.localeCompare(nameB);
+    });
+
     // Add new options
     let isFirst = true;
-    for (const [variationId, variation] of Object.entries(variations)) {
+    for (const [variationId, variation] of sortedVariations) {
         const option = document.createElement('option');
         option.value = variationId;
         option.textContent = variation.name;
@@ -197,8 +204,17 @@ function startTraining() {
 window.addEventListener('DOMContentLoaded', () => {
     initAudio();
     setupHintsToggle();
+    initCombinationModal();
+    loadCustomVariations(); // Load custom variations before updating dropdown
     updateOpeningDropdown();
     initializeGame();
+
+    // Check if we should open the create modal (from manage page)
+    if (window.location.hash === '#create') {
+        openModal();
+        // Clear the hash
+        history.replaceState(null, null, ' ');
+    }
 });
 
 // Recalculate coordinate positions on window resize
@@ -680,3 +696,383 @@ function updateMoveHistory() {
 function resetTraining() {
     initializeGame();
 }
+
+// ============================================================================
+// CREATE COMBINATION FEATURE
+// ============================================================================
+
+let recordingGame = null;
+let recordingColor = 'white';
+let recordingOpening = 'italian-game';
+let recordedMoves = []; // { move: 'e4', instruction: '' }
+let recordingSelectedSquare = null;
+
+// Initialize modal event listeners
+function initCombinationModal() {
+    const modal = document.getElementById('combination-modal');
+    const openBtn = document.getElementById('create-combination-btn');
+    const closeBtn = document.getElementById('modal-close');
+    const startRecordingBtn = document.getElementById('start-recording-btn');
+    const saveInstructionBtn = document.getElementById('save-instruction-btn');
+    const undoMoveBtn = document.getElementById('undo-move-btn');
+    const finishRecordingBtn = document.getElementById('finish-recording-btn');
+    const colorSelect = document.getElementById('combo-color');
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    startRecordingBtn.addEventListener('click', startRecording);
+    saveInstructionBtn.addEventListener('click', saveInstruction);
+    undoMoveBtn.addEventListener('click', undoRecordingMove);
+    finishRecordingBtn.addEventListener('click', finishRecording);
+    colorSelect.addEventListener('change', updateOpeningForColor);
+}
+
+// Update opening dropdown based on color selection
+function updateOpeningForColor() {
+    const color = document.getElementById('combo-color').value;
+    const openingSelect = document.getElementById('combo-opening');
+
+    if (color === 'white') {
+        openingSelect.innerHTML = '<option value="italian-game">Italian Game</option>';
+    } else {
+        openingSelect.innerHTML = '<option value="caro-kann">Caro-Kann Defense</option>';
+    }
+}
+
+function openModal() {
+    const modal = document.getElementById('combination-modal');
+    modal.classList.add('active');
+    // Reset to step 1
+    document.getElementById('modal-step-1').classList.remove('hidden');
+    document.getElementById('modal-step-2').classList.add('hidden');
+    // Reset color to white and update opening dropdown
+    document.getElementById('combo-color').value = 'white';
+    updateOpeningForColor();
+}
+
+function closeModal() {
+    const modal = document.getElementById('combination-modal');
+    modal.classList.remove('active');
+    // Reset state
+    recordingGame = null;
+    recordedMoves = [];
+    recordingSelectedSquare = null;
+}
+
+function startRecording() {
+    // Use the opening selected in the modal
+    recordingOpening = document.getElementById('combo-opening').value;
+    recordingColor = document.getElementById('combo-color').value;
+
+    // Initialize recording game
+    recordingGame = new Chess();
+    recordedMoves = [];
+    recordingSelectedSquare = null;
+
+    // Add initial instruction for black (waiting for white's first move)
+    if (recordingColor === 'black') {
+        recordedMoves.push({
+            move: null,
+            instruction: `You are black. Let's learn this variation. Wait for white's first move.`
+        });
+    }
+
+    // Switch to step 2
+    document.getElementById('modal-step-1').classList.add('hidden');
+    document.getElementById('modal-step-2').classList.remove('hidden');
+
+    // Create recording board
+    createRecordingBoard();
+    updateRecordedMovesList();
+}
+
+function createRecordingBoard() {
+    const boardElement = document.getElementById('recording-board');
+    boardElement.innerHTML = '';
+
+    const files = recordingColor === 'white' ? ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] : ['h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'];
+    const ranks = recordingColor === 'white' ? ['8', '7', '6', '5', '4', '3', '2', '1'] : ['1', '2', '3', '4', '5', '6', '7', '8'];
+
+    ranks.forEach((rank, rankIndex) => {
+        files.forEach((file, fileIndex) => {
+            const square = document.createElement('div');
+            const squareId = file + rank;
+            square.id = 'rec-' + squareId;
+            square.className = 'square ' + ((rankIndex + fileIndex) % 2 === 0 ? 'light' : 'dark');
+            square.addEventListener('click', () => handleRecordingSquareClick(squareId));
+            boardElement.appendChild(square);
+        });
+    });
+
+    updateRecordingBoard();
+}
+
+function updateRecordingBoard() {
+    const board = recordingGame.board();
+    const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+
+    for (let rank = 0; rank < 8; rank++) {
+        for (let file = 0; file < 8; file++) {
+            const piece = board[rank][file];
+            const squareId = files[file] + (8 - rank);
+            const squareElement = document.getElementById('rec-' + squareId);
+
+            if (squareElement) {
+                if (piece) {
+                    const color = piece.color === 'w' ? 'w' : 'b';
+                    const type = piece.type.toUpperCase();
+                    squareElement.textContent = pieces[color + type];
+                    squareElement.classList.remove('white-piece', 'black-piece');
+                    squareElement.classList.add(color === 'w' ? 'white-piece' : 'black-piece');
+                } else {
+                    squareElement.textContent = '';
+                    squareElement.classList.remove('white-piece', 'black-piece');
+                }
+            }
+        }
+    }
+}
+
+function handleRecordingSquareClick(squareId) {
+    if (recordingGame.game_over()) return;
+
+    if (!recordingSelectedSquare) {
+        // Select piece
+        const piece = recordingGame.get(squareId);
+        if (piece) {
+            recordingSelectedSquare = squareId;
+            document.getElementById('rec-' + squareId).classList.add('selected');
+        }
+    } else {
+        // Try to move
+        const move = recordingGame.move({
+            from: recordingSelectedSquare,
+            to: squareId,
+            promotion: 'q'
+        });
+
+        // Clear selection
+        document.getElementById('rec-' + recordingSelectedSquare).classList.remove('selected');
+
+        if (move) {
+            playMoveSound();
+
+            // Determine if this is a user move or computer move
+            const isUserMove = (move.color === 'w' && recordingColor === 'white') ||
+                               (move.color === 'b' && recordingColor === 'black');
+
+            if (isUserMove) {
+                // User's move - needs instruction
+                recordedMoves.push({
+                    move: move.san,
+                    instruction: ''
+                });
+                // Focus instruction input
+                document.getElementById('move-instruction').focus();
+            } else {
+                // Computer's move - auto-generate instruction placeholder
+                recordedMoves.push({
+                    move: move.san,
+                    instruction: `__COMPUTER_MOVE__`,
+                    isComputerMove: true
+                });
+            }
+
+            updateRecordingBoard();
+            updateRecordedMovesList();
+        } else if (squareId !== recordingSelectedSquare) {
+            // Try selecting different piece
+            const piece = recordingGame.get(squareId);
+            if (piece) {
+                recordingSelectedSquare = squareId;
+                document.getElementById('rec-' + squareId).classList.add('selected');
+                return;
+            }
+        }
+
+        recordingSelectedSquare = null;
+    }
+}
+
+function saveInstruction() {
+    const instructionInput = document.getElementById('move-instruction');
+    const instruction = instructionInput.value.trim();
+
+    if (!instruction) return;
+
+    // Find the last user move that needs an instruction
+    for (let i = recordedMoves.length - 1; i >= 0; i--) {
+        if (recordedMoves[i].move !== null && !recordedMoves[i].isComputerMove && !recordedMoves[i].instruction) {
+            recordedMoves[i].instruction = instruction;
+            break;
+        }
+    }
+
+    instructionInput.value = '';
+    updateRecordedMovesList();
+}
+
+function undoRecordingMove() {
+    if (recordedMoves.length === 0) return;
+
+    // Check if last recorded move was a null move (initial instruction for black)
+    const lastMove = recordedMoves[recordedMoves.length - 1];
+    if (lastMove.move === null) {
+        recordedMoves.pop();
+    } else {
+        recordingGame.undo();
+        recordedMoves.pop();
+    }
+
+    updateRecordingBoard();
+    updateRecordedMovesList();
+}
+
+function updateRecordedMovesList() {
+    const movesList = document.getElementById('recorded-moves-list');
+
+    if (recordedMoves.length === 0) {
+        movesList.innerHTML = 'No moves yet';
+        return;
+    }
+
+    let html = '';
+
+    for (let i = 0; i < recordedMoves.length; i++) {
+        const recorded = recordedMoves[i];
+        if (recorded.move === null) {
+            html += `<div style="color: #666; font-style: italic;">Start position</div>`;
+        } else {
+            const icon = recorded.isComputerMove ? '🖥️ ' : '';
+            html += `<span>${icon}${recorded.move}</span> `;
+        }
+    }
+
+    movesList.innerHTML = html || 'No moves yet';
+}
+
+function finishRecording() {
+    if (recordedMoves.filter(m => m.move !== null).length === 0) {
+        alert('Please record at least one move');
+        return;
+    }
+
+    // Build the variation data
+    const sequenceKey = 'playAs' + recordingColor.charAt(0).toUpperCase() + recordingColor.slice(1);
+
+    // Build user sequences (only user moves with instructions)
+    const userSequences = [];
+    const computerMovesList = [];
+
+    for (const recorded of recordedMoves) {
+        if (recorded.move === null) {
+            // Initial instruction for black
+            userSequences.push({ move: null, instruction: recorded.instruction });
+        } else if (recorded.isComputerMove) {
+            // Computer move
+            computerMovesList.push(recorded.move);
+        } else {
+            // User move
+            userSequences.push({ move: recorded.move, instruction: recorded.instruction });
+        }
+    }
+
+    // Auto-generate variation name from computer moves (opponent's responses)
+    const variationName = computerMovesList.join('-');
+
+    if (!variationName) {
+        alert('Please record at least one opponent move');
+        return;
+    }
+
+    // Check for duplicates (in both registered openings and localStorage)
+    const fullId = `${recordingOpening}:${variationName}`;
+    if (openings[fullId]) {
+        alert(`A variation "${variationName}" already exists for this opening.`);
+        return;
+    }
+
+    const variation = {
+        name: variationName,
+        openingId: recordingOpening,
+        isCustom: true,
+        sequences: {
+            [sequenceKey]: userSequences
+        },
+        computerMoves: {
+            [sequenceKey]: computerMovesList
+        }
+    };
+
+    // Save to localStorage
+    saveCustomVariation(recordingOpening, variationName, variation);
+
+    // Register the variation
+    registerCustomVariation(recordingOpening, variationName, variation);
+
+    // Update the variation dropdown and select the new variation
+    const currentOpening = document.getElementById('opening-select').value;
+    if (currentOpening === recordingOpening) {
+        updateVariationDropdown();
+        // Select the newly created variation
+        document.getElementById('variation-select').value = variationName;
+    }
+
+    alert(`Combination "${variationName}" saved successfully!`);
+    closeModal();
+}
+
+// LocalStorage functions
+function saveCustomVariation(openingId, variationId, variation) {
+    const storageKey = 'customVariations';
+    const stored = JSON.parse(localStorage.getItem(storageKey) || '{}');
+
+    if (!stored[openingId]) {
+        stored[openingId] = {};
+    }
+
+    stored[openingId][variationId] = variation;
+    localStorage.setItem(storageKey, JSON.stringify(stored));
+}
+
+function loadCustomVariations() {
+    const storageKey = 'customVariations';
+    const stored = JSON.parse(localStorage.getItem(storageKey) || '{}');
+
+    for (const [openingId, variations] of Object.entries(stored)) {
+        for (const [variationId, variation] of Object.entries(variations)) {
+            registerCustomVariation(openingId, variationId, variation);
+        }
+    }
+}
+
+function registerCustomVariation(openingId, variationId, variation) {
+    const fullId = `${openingId}:${variationId}`;
+
+    // Register in openingRegistry
+    if (!openingRegistry[openingId]) {
+        openingRegistry[openingId] = { name: openingId, variations: {} };
+    }
+    openingRegistry[openingId].variations[variationId] = {
+        name: variation.name,
+        isCustom: true
+    };
+
+    // Register sequences
+    openings[fullId] = {
+        name: variation.name,
+        isCustom: true,
+        ...variation.sequences
+    };
+
+    // Register computer moves
+    if (variation.computerMoves) {
+        computerMoves[fullId] = variation.computerMoves;
+    }
+
+    console.log(`✓ Registered custom: ${openingId} - ${variation.name}`);
+}
+
