@@ -19,6 +19,8 @@ let selectedSquare = null;
 let hintsEnabled = true;
 let audioContext = null;
 let lastMove = null; // Track last move for highlighting
+let undoneStack = []; // SAN strings of moves undone via back button (for redo)
+let pendingTimeout = null; // Timeout ID for pending computer move
 
 // ============================================================================
 // CONSTANTS
@@ -206,6 +208,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     initAudio();
     setupHintsToggle();
     initCombinationModal();
+    document.getElementById('back-btn').addEventListener('click', goBack);
+    document.getElementById('forward-btn').addEventListener('click', goForward);
     await seedBuiltinVariations(); // Seed built-ins to Firestore if not already there
     await loadCustomVariations(); // Load all variations from Firestore
     updateOpeningDropdown();
@@ -238,6 +242,9 @@ function initializeGame() {
     // Build the full opening ID
     selectedOpening = `${openingId}:${variationId}`;
 
+    clearTimeout(pendingTimeout);
+    pendingTimeout = null;
+    undoneStack = [];
     game = new Chess();
     currentStep = 0;
     selectedSquare = null;
@@ -270,8 +277,9 @@ function initializeGame() {
 
     // If user is black, make computer's first move
     if (userColor === 'black') {
-        setTimeout(() => makeComputerMove(true), 500);
+        pendingTimeout = setTimeout(() => makeComputerMove(true), 500);
     }
+    updateNavButtons();
 }
 
 // ============================================================================
@@ -395,6 +403,7 @@ function updateBoard() {
 
 function handleSquareClick(squareId) {
     if (game.game_over()) return;
+    if (undoneStack.length > 0) return; // Block moves while reviewing history
 
     // Check if it's the user's turn
     const isUserTurn = (game.turn() === 'w' && userColor === 'white') ||
@@ -569,6 +578,7 @@ function checkUserMove(moveSan) {
 
     // Check if move matches expected
     if (moveSan === expectedMove || isEquivalentMove(moveSan, expectedMove)) {
+        undoneStack = []; // Clear redo history on a new correct move
         currentStep++;
         updateMoveHistory();
         showInstruction();
@@ -585,11 +595,12 @@ function checkUserMove(moveSan) {
 
         // Make computer response if needed
         if (currentStep < openingSequence.length) {
-            setTimeout(() => {
+            pendingTimeout = setTimeout(() => {
                 makeComputerMove();
                 // Show hint after a brief delay to let the board update
                 setTimeout(() => {
                     showHintOnBoard();
+                    updateNavButtons();
                 }, HINT_DELAY);
             }, COMPUTER_MOVE_DELAY);
         } else {
@@ -671,6 +682,97 @@ function makeComputerMove(isInitialMove = false) {
 // ============================================================================
 // UI UPDATES
 // ============================================================================
+
+// ============================================================================
+// MOVE NAVIGATION (back / forward)
+// ============================================================================
+
+// Returns the next SAN move in the full sequence (user or computer) based on current game position
+function getNextPreviewMove() {
+    const len = game.history().length;
+    const sequenceKey = userGoal + 'As' + userColor.charAt(0).toUpperCase() + userColor.slice(1);
+    const compMoves = computerMoves[selectedOpening]?.[sequenceKey] || [];
+
+    if (userColor === 'white') {
+        // Alternates: user[0], comp[0], user[1], comp[1], ...
+        if (len % 2 === 0) {
+            const idx = len / 2;
+            return (idx < openingSequence.length && openingSequence[idx].move) ? openingSequence[idx].move : null;
+        } else {
+            const idx = Math.floor(len / 2);
+            return idx < compMoves.length ? compMoves[idx] : null;
+        }
+    } else {
+        // Black: comp[0], user[1], comp[1], user[2], ...
+        if (len % 2 === 0) {
+            const idx = len / 2;
+            return idx < compMoves.length ? compMoves[idx] : null;
+        } else {
+            const idx = (len + 1) / 2;
+            return (idx < openingSequence.length && openingSequence[idx].move) ? openingSequence[idx].move : null;
+        }
+    }
+}
+
+function updateNavButtons() {
+    const histLen = game.history().length;
+    const minLength = userColor === 'black' ? 1 : 0;
+    document.getElementById('back-btn').disabled = histLen <= minLength;
+    document.getElementById('forward-btn').disabled = undoneStack.length === 0 && getNextPreviewMove() === null;
+}
+
+function goBack() {
+    clearTimeout(pendingTimeout);
+    pendingTimeout = null;
+
+    const verboseHistory = game.history({ verbose: true });
+    const minLength = userColor === 'black' ? 1 : 0;
+    if (verboseHistory.length <= minLength) return;
+
+    const lastMoveSan = verboseHistory[verboseHistory.length - 1].san;
+    game.undo();
+    undoneStack.push(lastMoveSan);
+
+    // Restore last-move highlight for the new top of history
+    const newVerbose = game.history({ verbose: true });
+    lastMove = newVerbose.length > 0
+        ? { from: newVerbose[newVerbose.length - 1].from, to: newVerbose[newVerbose.length - 1].to }
+        : null;
+
+    // Recalculate currentStep from game history length
+    const len = newVerbose.length;
+    currentStep = userColor === 'white'
+        ? Math.ceil(len / 2)
+        : Math.ceil((len + 1) / 2);
+
+    updateBoard();
+    showHintOnBoard();
+    updateNavButtons();
+}
+
+function goForward() {
+    let san;
+    if (undoneStack.length > 0) {
+        san = undoneStack.pop();
+    } else {
+        san = getNextPreviewMove();
+        if (!san) return;
+    }
+
+    const move = game.move(san);
+    if (!move) { undoneStack.push(san); return; }
+
+    lastMove = { from: move.from, to: move.to };
+
+    const len = game.history().length;
+    currentStep = userColor === 'white'
+        ? Math.ceil(len / 2)
+        : Math.ceil((len + 1) / 2);
+
+    updateBoard();
+    showHintOnBoard();
+    updateNavButtons();
+}
 
 function showInstruction() {
     // instruction-text element removed from UI; no-op
