@@ -210,6 +210,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     await loadCustomVariations(); // Load all variations from Firestore
     updateOpeningDropdown();
     initializeGame();
+    document.getElementById('loading-overlay').classList.add('hidden');
 
     // Check if we should open the create modal (from manage page)
     if (window.location.hash === '#create') {
