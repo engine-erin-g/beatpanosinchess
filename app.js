@@ -990,6 +990,8 @@ async function seedBuiltinVariations() {
         for (const [variationId] of Object.entries(opening.variations)) {
             // Skip custom variations — only overwrite built-ins
             if (existing[variationId] && existing[variationId].isCustom) continue;
+            // Skip variations the admin has explicitly deleted
+            if (existing[variationId] && existing[variationId].deleted) continue;
 
             const fullId = `${openingId}:${variationId}`;
             const variationData = openings[fullId];
@@ -1024,7 +1026,16 @@ async function loadCustomVariations() {
         const openingId = doc.id;
         const variations = doc.data();
         for (const [variationId, variation] of Object.entries(variations)) {
-            if (variation && !variation.deleted) {
+            if (!variation) continue;
+            if (variation.deleted) {
+                // Unregister built-ins that were deleted via admin
+                const fullId = `${openingId}:${variationId}`;
+                delete openings[fullId];
+                delete computerMoves[fullId];
+                if (openingRegistry[openingId]) {
+                    delete openingRegistry[openingId].variations[variationId];
+                }
+            } else {
                 registerCustomVariation(openingId, variationId, variation);
             }
         }
