@@ -17,11 +17,11 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn how to handle the English Opening approach to Caro-Kann structures. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays c4 (English Opening). Respond with c6, preparing d5!" },
-                    { move: 'd5', instruction: "Good! White plays Nc3. Play d5 to challenge the center!" },
-                    { move: 'd4', instruction: "Excellent! White plays e4, transposing to a Caro-Kann structure. Play d4! This advances your pawn and gains space!" },
-                    { move: 'e5', instruction: "Perfect! White plays Nce2. Play e5 to establish a strong pawn center and control key squares!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'd5' },
+                    { move: 'd4' },
+                    { move: 'e5' }
                 ]
             },
 
@@ -35,11 +35,11 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn to respond to the e3-Bd3 system. Wait for white's first move." },
-                    { move: 'd5', instruction: "White plays e3. Play d5 to control the center!" },
-                    { move: 'e5', instruction: "Good! White plays Bd3. Play e5 to grab more space in the center!" },
-                    { move: 'Nc6', instruction: "Excellent! White plays c4. Develop your knight to c6!" },
-                    { move: 'Qxd5', instruction: "Perfect! White captures cxd5. Recapture with Qxd5, centralizing your queen!" }
+                    { move: null },
+                    { move: 'd5' },
+                    { move: 'e5' },
+                    { move: 'Nc6' },
+                    { move: 'Qxd5' }
                 ]
             },
 
@@ -53,11 +53,11 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn to respond to the Bc4 variation. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
-                    { move: 'd5', instruction: "Good! White plays Bc4. Play d5 to challenge the center and attack the bishop!" },
-                    { move: 'cxd5', instruction: "Excellent! White captures exd5. Recapture with cxd5!" },
-                    { move: 'e5', instruction: "Perfect! White retreats Bd3. Develop your bishop to f5 - the classic Caro-Kann bishop!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'd5' },
+                    { move: 'cxd5' },
+                    { move: 'e5' }
                 ]
             },
 
@@ -71,14 +71,14 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn the Caro-Kann Advance Variation. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
-                    { move: 'd5', instruction: "Good! White plays d4. Play d5 to challenge the center!" },
-                    { move: 'c5', instruction: "Excellent! White plays e5 (Advance Variation). Strike at the center with c5!" },
-                    { move: 'Nc6', instruction: "Perfect! White captures dxc5. Develop your knight to c6!" },
-                    { move: 'Bg4', instruction: "Great! White plays Nf3. Develop your bishop to g4, pinning the knight!" },
-                    { move: 'e6', instruction: "Well done! White plays Be2. Play e6 to solidify your center!" },
-                    { move: 'Bxc5', instruction: "Excellent! White castles. Capture Bxc5 to reclaim your pawn. You have a solid Caro-Kann position!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'd5' },
+                    { move: 'c5' },
+                    { move: 'Nc6' },
+                    { move: 'Bg4' },
+                    { move: 'e6' },
+                    { move: 'Bxc5' }
                 ]
             },
 
@@ -92,16 +92,16 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn a tactical Advance Variation line. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
-                    { move: 'd5', instruction: "Good! White plays d4. Play d5 to challenge the center!" },
-                    { move: 'c5', instruction: "Excellent! White plays e5 (Advance Variation). Strike at the center with c5!" },
-                    { move: 'Nc6', instruction: "Perfect! White plays Nf3. Develop your knight to c6!" },
-                    { move: 'e6', instruction: "Great! White captures dxc5. Play e6 to prepare your bishop development!" },
-                    { move: 'Bxc5', instruction: "Well done! White plays Bd5. Capture Bxc5 to reclaim your pawn!" },
-                    { move: 'Qb6', instruction: "Excellent! White plays Bg5. Develop your queen to b6, attacking b2 and putting pressure on white!" },
-                    { move: 'Bxf2+', instruction: "Perfect! White plays Qe2. Now sacrifice your bishop with Bxf2+! This gives you a strong initiative!" },
-                    { move: 'Qxb5', instruction: "Brilliant! White recaptures Qxf2. Capture the b2 pawn with check: Qxb2! You've gained material and disrupted white's position!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'd5' },
+                    { move: 'c5' },
+                    { move: 'Nc6' },
+                    { move: 'e6' },
+                    { move: 'Bxc5' },
+                    { move: 'Qb6' },
+                    { move: 'Bxf2+' },
+                    { move: 'Qxb5' }
                 ]
             },
 
@@ -115,11 +115,11 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn the Two Knights Variation with e5 advance. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
-                    { move: 'd5', instruction: "Good! White plays Nf3. Play d5 to challenge the center!" },
-                    { move: 'Bg4', instruction: "Excellent! White plays e5 (advancing the pawn). Develop your bishop to g4, pinning the knight!" },
-                    { move: 'e6', instruction: "Perfect! White plays d4 to support the center. Play e6 to solidify your position and prepare to develop!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'd5' },
+                    { move: 'Bg4' },
+                    { move: 'e6' }
                 ]
             },
 
@@ -133,15 +133,15 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn how to handle the aggressive early queen attack. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
-                    { move: 'Nf6', instruction: "White plays Qh5, attacking f7! Defend with Nf6, also developing and attacking the queen." },
-                    { move: 'e5', instruction: "Good! White retreats to Qh4. Play e5 to control the center!" },
-                    { move: 'd6', instruction: "White plays f4. Solidify your center with d6!" },
-                    { move: 'dxe5', instruction: "Excellent! White captures fxe5. Recapture with dxe5!" },
-                    { move: 'Be7', instruction: "Perfect! White develops Nf3. Develop your bishop to e7!" },
-                    { move: 'O-O', instruction: "Great! White plays Qg3. Castle kingside to bring your rook into play!" },
-                    { move: 'b5', instruction: "Well done! White develops Nc3. Play b5 to start your queenside expansion. You've successfully defended against the early queen attack!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'Nf6' },
+                    { move: 'e5' },
+                    { move: 'd6' },
+                    { move: 'dxe5' },
+                    { move: 'Be7' },
+                    { move: 'O-O' },
+                    { move: 'b5' }
                 ]
             },
 
@@ -155,11 +155,11 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn the Classical Variation of the Caro-Kann. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
-                    { move: 'd5', instruction: "Good! White plays d4. Play d5 to challenge the center!" },
-                    { move: 'dxe4', instruction: "Excellent! White plays Nc3. Capture dxe4 to trade in the center!" },
-                    { move: 'Bf5', instruction: "Perfect! White plays Nxe4. Develop your bishop to f5 - the classic Caro-Kann bishop!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'd5' },
+                    { move: 'dxe4' },
+                    { move: 'Bf5' }
                 ]
             },
 
@@ -173,10 +173,10 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn how to handle the aggressive e5 push. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
-                    { move: 'd6', instruction: "White plays e5 aggressively, trying to gain space. Counter with d6 to challenge the pawn!" },
-                    { move: 'exd6', instruction: "Perfect! White captures exd6. Recapture with exd6 to open the e-file and develop your pieces!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'd6' },
+                    { move: 'exd6' }
                 ]
             },
 
@@ -190,12 +190,12 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn to respond to the King's Gambit approach to the Caro-Kann. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
-                    { move: 'd5', instruction: "Good! White plays f4 (aggressive King's Gambit style). Play d5 to challenge the center!" },
-                    { move: 'Bf5', instruction: "Excellent! White plays e5, gaining space. Develop your bishop to f5 - the classic Caro-Kann bishop!" },
-                    { move: 'e6', instruction: "Perfect! White plays d4, establishing a strong center. Play e6 to solidify your position!" },
-                    { move: 'c5', instruction: "Great! White develops Nc3. Strike at the center with c5! You're counterattacking white's pawn chain!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'd5' },
+                    { move: 'Bf5' },
+                    { move: 'e6' },
+                    { move: 'c5' }
                 ]
             },
 
@@ -209,15 +209,15 @@ registerOpening({
 
             sequences: {
                 playAsBlack: [
-                    { move: null, instruction: "You are black. Let's learn how to handle the Qh5-Qf3 early queen attack. Wait for white's first move." },
-                    { move: 'c6', instruction: "White plays e4. Respond with c6 - the Caro-Kann Defense!" },
-                    { move: 'Nf6', instruction: "White plays Qh5, attacking f7! Defend with Nf6, also developing and attacking the queen." },
-                    { move: 'e5', instruction: "Good! White plays Qf3, still attacking f7. Play e5 to control the center!" },
-                    { move: 'd5', instruction: "White plays Bc4, increasing pressure on f7. Play d5 to challenge the center!" },
-                    { move: 'cxd5', instruction: "Excellent! White captures exd5. Recapture with cxd5!" },
-                    { move: 'Nc6', instruction: "Perfect! White retreats Bb3. Develop your knight to c6!" },
-                    { move: 'Bc5', instruction: "Great! White plays d3. Develop your bishop to c5, targeting f2!" },
-                    { move: 'O-O', instruction: "Well done! White retreats Qe1. Castle kingside to safety. You've successfully neutralized white's early aggression!" }
+                    { move: null },
+                    { move: 'c6' },
+                    { move: 'Nf6' },
+                    { move: 'e5' },
+                    { move: 'd5' },
+                    { move: 'cxd5' },
+                    { move: 'Nc6' },
+                    { move: 'Bc5' },
+                    { move: 'O-O' }
                 ]
             },
 

@@ -41,49 +41,10 @@
             </div>
 
             <div class="info-container">
-                <div id="instruction-box" class="instruction-box">
-                    <p id="instruction-text">Select your preferences above and make your first move...</p>
-                </div>
-
-                <div id="move-history" class="move-history">
-                    <div class="move-history-header">
-                        <h3>Move History</h3>
-                        <label class="toggle-label">
-                            <input type="checkbox" id="hints-toggle" checked>
-                            <span class="toggle-text">Show Hints</span>
-                        </label>
-                    </div>
-                    <div id="moves-list">No moves yet</div>
-                </div>
-
-                <button id="reset-button" class="reset-button">Reset Board</button>
-
-                <!-- Golden Rules -->
-                <details class="golden-rules" open>
-                    <summary>5 Golden Rules</summary>
-                    <div class="golden-rules-content">
-                        <div class="golden-rule">
-                            <span class="rule-letter">1</span>
-                            <span class="rule-text">Go Forward And Make Threats</span>
-                        </div>
-                        <div class="golden-rule">
-                            <span class="rule-letter">2</span>
-                            <span class="rule-text">Win The Center</span>
-                        </div>
-                        <div class="golden-rule">
-                            <span class="rule-letter">3</span>
-                            <span class="rule-text">Think Their Motives Behind Every Move</span>
-                        </div>
-                        <div class="golden-rule">
-                            <span class="rule-letter">4</span>
-                            <span class="rule-text">Improve Your Least Active Piece</span>
-                        </div>
-                        <div class="golden-rule">
-                            <span class="rule-letter">5</span>
-                            <span class="rule-text">Restrict Opponent's Active Piece</span>
-                        </div>
-                    </div>
-                </details>
+                <label class="toggle-label">
+                    <input type="checkbox" id="hints-toggle" checked>
+                    <span class="toggle-text">Show Hints</span>
+                </label>
 
                 <details class="resource-links">
                     <summary class="resource-dropdown-title">Learning Resources</summary>
@@ -100,8 +61,6 @@
                     </div>
                 </details>
 
-                <button id="create-combination-btn" class="create-combination-button">+ Create New Combination</button>
-                <a href="manage-combinations.html" class="manage-combinations-link">Manage Combinations</a>
             </div>
         </div>
     </div>
@@ -143,10 +102,9 @@
                     <h4>Recorded Moves:</h4>
                     <div id="recorded-moves-list">No moves yet</div>
                 </div>
-                <div class="instruction-input-container">
-                    <label for="move-instruction">Instruction for last move:</label>
-                    <input type="text" id="move-instruction" class="modal-input" placeholder="Enter instruction for this move...">
-                    <button id="save-instruction-btn" class="modal-button small">Save Instruction</button>
+                <div class="modal-form-group">
+                    <label for="combo-nickname">Nickname:</label>
+                    <input type="text" id="combo-nickname" class="modal-input" placeholder="e.g. Fried Liver Attack">
                 </div>
                 <div class="modal-actions">
                     <button id="undo-move-btn" class="modal-button secondary">Undo Last Move</button>
@@ -158,6 +116,11 @@
 
     <!-- Chess.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
 
     <!-- Opening registry (must load first) -->
     <script src="openings.js"></script>

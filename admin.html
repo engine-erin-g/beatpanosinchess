@@ -362,22 +362,28 @@
     <!-- Chess.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
     <!-- Opening registry -->
     <script src="openings.js"></script>
     <script src="openings/caro-kann.js"></script>
     <script src="openings/italian-game.js"></script>
 
     <script>
-        // Storage key
-        const STORAGE_KEY = 'customVariations';
-
         // Current editing state
         let currentEditOpening = null;
         let currentEditVariation = null;
 
         // Load and display combinations
-        function loadCombinations() {
-            const customStored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        async function loadCombinations() {
+            const snapshot = await db.collection('customVariations').get();
+            const customStored = {};
+            snapshot.forEach(doc => {
+                customStored[doc.id] = doc.data();
+            });
             const container = document.getElementById('combinations-list');
 
             // Combine all variations (use custom overrides when available)
@@ -469,10 +475,13 @@
 
                     const moveCount = sequences.filter(s => s.move !== null).length;
 
+                    const nickname = variation.nickname || '';
+                    const displayName = nickname ? `${nickname} (${variationId})` : variationId;
+
                     html += `
                         <div class="variation-item">
                             <div class="variation-info">
-                                <div class="variation-name">${variation.name || variationId}</div>
+                                <div class="variation-name">${displayName}</div>
                                 <div class="variation-details">
                                     Play as ${playAs} | ${moveCount} moves
                                 </div>
@@ -510,97 +519,45 @@
         }
 
         // Delete combination
-        function deleteCombination(openingId, variationId) {
+        async function deleteCombination(openingId, variationId) {
             if (!confirm(`Are you sure you want to delete "${variationId}"?`)) {
                 return;
             }
 
-            const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            const docRef = db.collection('customVariations').doc(openingId);
+            const doc = await docRef.get();
+            const stored = doc.exists ? doc.data() : {};
 
-            // Check if it's in localStorage
-            if (stored[openingId] && stored[openingId][variationId]) {
-                delete stored[openingId][variationId];
-                if (Object.keys(stored[openingId]).length === 0) {
-                    delete stored[openingId];
-                }
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+            if (stored[variationId] && stored[variationId].isCustom) {
+                // Custom variation — remove the field entirely
+                await docRef.update({
+                    [variationId]: firebase.firestore.FieldValue.delete()
+                });
             } else {
-                // It's a built-in, save a "deleted" marker
-                if (!stored[openingId]) {
-                    stored[openingId] = {};
-                }
-                stored[openingId][variationId] = { deleted: true };
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+                // Built-in variation — store a deleted marker to hide it
+                await docRef.set({ [variationId]: { deleted: true } }, { merge: true });
             }
 
             loadCombinations();
         }
 
         // Edit combination
-        function editCombination(openingId, variationId) {
+        async function editCombination(openingId, variationId) {
             currentEditOpening = openingId;
             currentEditVariation = variationId;
 
-            const customStored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-            let sequences, sequenceKey, variationName;
-
-            // Check for custom override first
-            const customOverride = customStored[openingId]?.[variationId];
-            if (customOverride && customOverride.sequences) {
-                sequenceKey = Object.keys(customOverride.sequences)[0];
-                sequences = customOverride.sequences[sequenceKey] || [];
-                variationName = customOverride.name || variationId;
-            } else {
-                // Get from built-in openings
-                const fullId = `${openingId}:${variationId}`;
-                const data = openings[fullId];
-                if (!data) return;
-
-                if (data.playAsWhite) {
-                    sequences = data.playAsWhite;
-                    sequenceKey = 'playAsWhite';
-                } else if (data.playAsBlack) {
-                    sequences = data.playAsBlack;
-                    sequenceKey = 'playAsBlack';
-                }
-                variationName = data.variationName || variationId;
-            }
+            const doc = await db.collection('customVariations').doc(openingId).get();
+            const storedData = doc.exists ? doc.data() : {};
+            const currentNickname = storedData[variationId]?.nickname || '';
 
             document.getElementById('edit-modal-title').textContent = 'Edit Combination';
 
-            let html = `<h3 style="margin-top: 0; color: #3d2817;">${variationName}</h3>`;
-
-            sequences.forEach((seq, index) => {
-                if (seq.move === null) {
-                    html += `
-                        <div class="edit-sequence-item">
-                            <div class="edit-move-number">Start</div>
-                            <div class="edit-move-info">
-                                <div class="edit-move-san">(Initial instruction)</div>
-                                <input type="text" class="edit-instruction-input"
-                                       data-index="${index}"
-                                       value="${escapeHtml(seq.instruction || '')}"
-                                       placeholder="Enter instruction...">
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    html += `
-                        <div class="edit-sequence-item">
-                            <div class="edit-move-number">${index}.</div>
-                            <div class="edit-move-info">
-                                <div class="edit-move-san">${seq.move}</div>
-                                <input type="text" class="edit-instruction-input"
-                                       data-index="${index}"
-                                       value="${escapeHtml(seq.instruction || '')}"
-                                       placeholder="Enter instruction...">
-                            </div>
-                        </div>
-                    `;
-                }
-            });
-
-            html += `
+            const html = `
+                <p style="color: #8b7355; font-family: 'Courier New', monospace; margin-bottom: 15px;">${variationId}</p>
+                <label style="display: block; margin-bottom: 8px; color: #3d2817; font-family: Georgia, serif;">Nickname:</label>
+                <input type="text" id="edit-nickname-input" class="edit-instruction-input"
+                       value="${escapeHtml(currentNickname)}"
+                       placeholder="e.g. Fried Liver Attack">
                 <div class="edit-modal-actions">
                     <button class="action-btn cancel-btn" onclick="closeEditModal()">Cancel</button>
                     <button class="action-btn save-btn" onclick="saveEdit()">Save Changes</button>
@@ -626,64 +583,17 @@
         }
 
         // Save edit
-        function saveEdit() {
+        async function saveEdit() {
             if (!currentEditOpening || !currentEditVariation) return;
 
-            const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-            const inputs = document.querySelectorAll('.edit-instruction-input');
+            const nickname = document.getElementById('edit-nickname-input').value.trim();
 
-            // Get the original data
-            const fullId = `${currentEditOpening}:${currentEditVariation}`;
-            const builtinData = openings[fullId];
-            const existingCustom = stored[currentEditOpening]?.[currentEditVariation];
+            await db.collection('customVariations').doc(currentEditOpening).set({
+                [currentEditVariation]: { nickname: nickname || null }
+            }, { merge: true });
 
-            let sequenceKey, sequences;
-
-            if (existingCustom && existingCustom.sequences) {
-                sequenceKey = Object.keys(existingCustom.sequences)[0];
-                sequences = existingCustom.sequences[sequenceKey].map(s => ({...s}));
-            } else if (builtinData) {
-                if (builtinData.playAsWhite) {
-                    sequenceKey = 'playAsWhite';
-                    sequences = builtinData.playAsWhite.map(s => ({...s}));
-                } else if (builtinData.playAsBlack) {
-                    sequenceKey = 'playAsBlack';
-                    sequences = builtinData.playAsBlack.map(s => ({...s}));
-                }
-            } else {
-                return;
-            }
-
-            // Update instructions from inputs
-            inputs.forEach(input => {
-                const index = parseInt(input.dataset.index);
-                if (sequences[index] !== undefined) {
-                    sequences[index].instruction = input.value;
-                }
-            });
-
-            // Get computer moves
-            const computerMovesData = computerMoves[fullId] || (existingCustom && existingCustom.computerMoves);
-
-            // Save to localStorage
-            if (!stored[currentEditOpening]) {
-                stored[currentEditOpening] = {};
-            }
-
-            stored[currentEditOpening][currentEditVariation] = {
-                name: currentEditVariation,
-                openingId: currentEditOpening,
-                isCustom: true,
-                sequences: {
-                    [sequenceKey]: sequences
-                },
-                computerMoves: computerMovesData ? { [sequenceKey]: computerMovesData[sequenceKey] } : {}
-            };
-
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
             closeEditModal();
             loadCombinations();
-            alert('Changes saved successfully!');
         }
 
         // Create new button - redirect to main page

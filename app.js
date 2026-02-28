@@ -97,7 +97,6 @@ async function playMoveSound() {
 document.getElementById('color-select').addEventListener('change', handleSelectorChange);
 document.getElementById('opening-select').addEventListener('change', handleOpeningChange);
 document.getElementById('variation-select').addEventListener('change', initializeGame);
-document.getElementById('reset-button').addEventListener('click', resetTraining);
 
 function setupHintsToggle() {
     const hintsToggle = document.getElementById('hints-toggle');
@@ -180,7 +179,9 @@ function updateVariationDropdown() {
     for (const [variationId, variation] of sortedVariations) {
         const option = document.createElement('option');
         option.value = variationId;
-        option.textContent = variation.name;
+        option.textContent = variation.nickname
+            ? `${variation.nickname} (${variationId})`
+            : variationId;
         if (isFirst) {
             option.selected = true;
             isFirst = false;
@@ -201,11 +202,12 @@ function startTraining() {
 }
 
 // Initialize on page load
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     initAudio();
     setupHintsToggle();
     initCombinationModal();
-    loadCustomVariations(); // Load custom variations before updating dropdown
+    await seedBuiltinVariations(); // Seed built-ins to Firestore if not already there
+    await loadCustomVariations(); // Load all variations from Firestore
     updateOpeningDropdown();
     initializeGame();
 
@@ -597,8 +599,7 @@ function checkUserMove(moveSan) {
         // Undo the move if it's not the expected one
         game.undo();
         updateBoard();
-        document.getElementById('instruction-text').textContent =
-            `Not quite! Try ${expectedMove}. ` + openingSequence[currentStep].instruction;
+        // instruction-text removed from UI
         showHintOnBoard();
     }
 }
@@ -671,26 +672,11 @@ function makeComputerMove(isInitialMove = false) {
 // ============================================================================
 
 function showInstruction() {
-    if (currentStep < openingSequence.length) {
-        document.getElementById('instruction-text').textContent = openingSequence[currentStep].instruction;
-    } else {
-        document.getElementById('instruction-text').textContent = "Great job! You've completed this opening tutorial. Click 'Reset Board' to practice again.";
-    }
+    // instruction-text element removed from UI; no-op
 }
 
 function updateMoveHistory() {
-    const history = game.history();
-    const movesList = document.getElementById('moves-list');
-    let html = '';
-
-    for (let i = 0; i < history.length; i += 2) {
-        const moveNum = Math.floor(i / 2) + 1;
-        const whiteMove = history[i];
-        const blackMove = history[i + 1] || '';
-        html += `${moveNum}. ${whiteMove} ${blackMove}<br>`;
-    }
-
-    movesList.innerHTML = html || 'No moves yet';
+    // moves-list element removed from UI; no-op
 }
 
 function resetTraining() {
@@ -704,27 +690,23 @@ function resetTraining() {
 let recordingGame = null;
 let recordingColor = 'white';
 let recordingOpening = 'italian-game';
-let recordedMoves = []; // { move: 'e4', instruction: '' }
+let recordedMoves = []; // { move: 'e4' }
 let recordingSelectedSquare = null;
 
 // Initialize modal event listeners
 function initCombinationModal() {
     const modal = document.getElementById('combination-modal');
-    const openBtn = document.getElementById('create-combination-btn');
     const closeBtn = document.getElementById('modal-close');
     const startRecordingBtn = document.getElementById('start-recording-btn');
-    const saveInstructionBtn = document.getElementById('save-instruction-btn');
     const undoMoveBtn = document.getElementById('undo-move-btn');
     const finishRecordingBtn = document.getElementById('finish-recording-btn');
     const colorSelect = document.getElementById('combo-color');
 
-    openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
     startRecordingBtn.addEventListener('click', startRecording);
-    saveInstructionBtn.addEventListener('click', saveInstruction);
     undoMoveBtn.addEventListener('click', undoRecordingMove);
     finishRecordingBtn.addEventListener('click', finishRecording);
     colorSelect.addEventListener('change', updateOpeningForColor);
@@ -760,6 +742,8 @@ function closeModal() {
     recordingGame = null;
     recordedMoves = [];
     recordingSelectedSquare = null;
+    const nicknameInput = document.getElementById('combo-nickname');
+    if (nicknameInput) nicknameInput.value = '';
 }
 
 function startRecording() {
@@ -772,12 +756,9 @@ function startRecording() {
     recordedMoves = [];
     recordingSelectedSquare = null;
 
-    // Add initial instruction for black (waiting for white's first move)
+    // Add initial null move for black (waiting for white's first move)
     if (recordingColor === 'black') {
-        recordedMoves.push({
-            move: null,
-            instruction: `You are black. Let's learn this variation. Wait for white's first move.`
-        });
+        recordedMoves.push({ move: null });
     }
 
     // Switch to step 2
@@ -865,20 +846,9 @@ function handleRecordingSquareClick(squareId) {
                                (move.color === 'b' && recordingColor === 'black');
 
             if (isUserMove) {
-                // User's move - needs instruction
-                recordedMoves.push({
-                    move: move.san,
-                    instruction: ''
-                });
-                // Focus instruction input
-                document.getElementById('move-instruction').focus();
+                recordedMoves.push({ move: move.san });
             } else {
-                // Computer's move - auto-generate instruction placeholder
-                recordedMoves.push({
-                    move: move.san,
-                    instruction: `__COMPUTER_MOVE__`,
-                    isComputerMove: true
-                });
+                recordedMoves.push({ move: move.san, isComputerMove: true });
             }
 
             updateRecordingBoard();
@@ -895,24 +865,6 @@ function handleRecordingSquareClick(squareId) {
 
         recordingSelectedSquare = null;
     }
-}
-
-function saveInstruction() {
-    const instructionInput = document.getElementById('move-instruction');
-    const instruction = instructionInput.value.trim();
-
-    if (!instruction) return;
-
-    // Find the last user move that needs an instruction
-    for (let i = recordedMoves.length - 1; i >= 0; i--) {
-        if (recordedMoves[i].move !== null && !recordedMoves[i].isComputerMove && !recordedMoves[i].instruction) {
-            recordedMoves[i].instruction = instruction;
-            break;
-        }
-    }
-
-    instructionInput.value = '';
-    updateRecordedMovesList();
 }
 
 function undoRecordingMove() {
@@ -963,20 +915,17 @@ function finishRecording() {
     // Build the variation data
     const sequenceKey = 'playAs' + recordingColor.charAt(0).toUpperCase() + recordingColor.slice(1);
 
-    // Build user sequences (only user moves with instructions)
+    // Build user sequences and computer move list
     const userSequences = [];
     const computerMovesList = [];
 
     for (const recorded of recordedMoves) {
         if (recorded.move === null) {
-            // Initial instruction for black
-            userSequences.push({ move: null, instruction: recorded.instruction });
+            userSequences.push({ move: null });
         } else if (recorded.isComputerMove) {
-            // Computer move
             computerMovesList.push(recorded.move);
         } else {
-            // User move
-            userSequences.push({ move: recorded.move, instruction: recorded.instruction });
+            userSequences.push({ move: recorded.move });
         }
     }
 
@@ -995,8 +944,11 @@ function finishRecording() {
         return;
     }
 
+    const nickname = document.getElementById('combo-nickname').value.trim();
+
     const variation = {
         name: variationName,
+        nickname: nickname || null,
         openingId: recordingOpening,
         isCustom: true,
         sequences: {
@@ -1007,8 +959,10 @@ function finishRecording() {
         }
     };
 
-    // Save to localStorage
-    saveCustomVariation(recordingOpening, variationName, variation);
+    // Save to Firestore
+    saveCustomVariation(recordingOpening, variationName, variation).catch(err => {
+        console.error('Failed to save to Firestore:', err);
+    });
 
     // Register the variation
     registerCustomVariation(recordingOpening, variationName, variation);
@@ -1025,28 +979,56 @@ function finishRecording() {
     closeModal();
 }
 
-// LocalStorage functions
-function saveCustomVariation(openingId, variationId, variation) {
-    const storageKey = 'customVariations';
-    const stored = JSON.parse(localStorage.getItem(storageKey) || '{}');
+// Firestore functions
+async function seedBuiltinVariations() {
+    for (const [openingId, opening] of Object.entries(openingRegistry)) {
+        const docRef = db.collection('customVariations').doc(openingId);
+        const doc = await docRef.get();
+        const existing = doc.exists ? doc.data() : {};
 
-    if (!stored[openingId]) {
-        stored[openingId] = {};
-    }
+        const toWrite = {};
+        for (const [variationId] of Object.entries(opening.variations)) {
+            // Skip custom variations — only overwrite built-ins
+            if (existing[variationId] && existing[variationId].isCustom) continue;
 
-    stored[openingId][variationId] = variation;
-    localStorage.setItem(storageKey, JSON.stringify(stored));
-}
+            const fullId = `${openingId}:${variationId}`;
+            const variationData = openings[fullId];
+            if (variationData) {
+                const seqKey = variationData.playAsWhite ? 'playAsWhite' : 'playAsBlack';
+                toWrite[variationId] = {
+                    name: variationId,
+                    openingId: openingId,
+                    isCustom: false,
+                    sequences: { [seqKey]: variationData[seqKey] },
+                    computerMoves: computerMoves[fullId] ? { [seqKey]: computerMoves[fullId][seqKey] } : {}
+                };
+            }
+        }
 
-function loadCustomVariations() {
-    const storageKey = 'customVariations';
-    const stored = JSON.parse(localStorage.getItem(storageKey) || '{}');
-
-    for (const [openingId, variations] of Object.entries(stored)) {
-        for (const [variationId, variation] of Object.entries(variations)) {
-            registerCustomVariation(openingId, variationId, variation);
+        if (Object.keys(toWrite).length > 0) {
+            await docRef.set(toWrite, { merge: true });
         }
     }
+}
+
+async function saveCustomVariation(openingId, variationId, variation) {
+    await db.collection('customVariations').doc(openingId).set(
+        { [variationId]: variation },
+        { merge: true }
+    );
+}
+
+async function loadCustomVariations() {
+    const snapshot = await db.collection('customVariations').get();
+    snapshot.forEach(doc => {
+        const openingId = doc.id;
+        const variations = doc.data();
+        for (const [variationId, variation] of Object.entries(variations)) {
+            if (variation && !variation.deleted) {
+                registerCustomVariation(openingId, variationId, variation);
+            }
+        }
+    });
 }
 
 function registerCustomVariation(openingId, variationId, variation) {
@@ -1058,6 +1040,7 @@ function registerCustomVariation(openingId, variationId, variation) {
     }
     openingRegistry[openingId].variations[variationId] = {
         name: variation.name,
+        nickname: variation.nickname || null,
         isCustom: true
     };
 
