@@ -403,7 +403,6 @@ function updateBoard() {
 
 function handleSquareClick(squareId) {
     if (game.game_over()) return;
-    if (undoneStack.length > 0) return; // Block moves while reviewing history
 
     // Check if it's the user's turn
     const isUserTurn = (game.turn() === 'w' && userColor === 'white') ||
