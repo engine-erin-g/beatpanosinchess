@@ -392,6 +392,23 @@ h1 {
     justify-content: center;
 }
 
+.reset-btn {
+    padding: 6px 14px;
+    font-size: 0.85em;
+    background: #fefdfb;
+    border: 2px solid #8b7355;
+    border-radius: 6px;
+    color: #3d2817;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: normal;
+}
+
+.reset-btn:hover {
+    background: #8b7355;
+    color: #fefdfb;
+}
+
 .nav-arrow-btn {
     width: 52px;
     height: 52px;

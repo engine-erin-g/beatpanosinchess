@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#2c1810"/>
+
+  <!-- Chess board pattern (2x2 squares in corner) -->
+  <rect x="30" y="30" width="60" height="60" fill="#d4a96a" opacity="0.3"/>
+  <rect x="90" y="30" width="60" height="60" fill="#8b5e3c" opacity="0.3"/>
+  <rect x="30" y="90" width="60" height="60" fill="#8b5e3c" opacity="0.3"/>
+  <rect x="90" y="90" width="60" height="60" fill="#d4a96a" opacity="0.3"/>
+
+  <!-- Knight piece (white) centered -->
+  <text x="256" y="320"
+        font-family="serif"
+        font-size="300"
+        text-anchor="middle"
+        fill="#f5e6c8"
+        stroke="#c8a96a"
+        stroke-width="6">♞</text>
+</svg>

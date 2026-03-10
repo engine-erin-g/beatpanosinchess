@@ -210,6 +210,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     initCombinationModal();
     document.getElementById('back-btn').addEventListener('click', goBack);
     document.getElementById('forward-btn').addEventListener('click', goForward);
+    document.getElementById('reset-btn').addEventListener('click', resetTraining);
+    document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.key === 'ArrowLeft') goBack();
+        else if (e.key === 'ArrowRight') goForward();
+    });
     await seedBuiltinVariations(); // Seed built-ins to Firestore if not already there
     await loadCustomVariations(); // Load all variations from Firestore
     updateOpeningDropdown();
